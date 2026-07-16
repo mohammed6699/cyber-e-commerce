@@ -1,0 +1,79 @@
+ <div class="w-[266.33px] min-w-[200px] rounded-[9px] shadow-md p-4 bg-[#F6F6F6]">
+      <!-- Discount Badge -->
+      <div class="relative">
+        <span
+          class="absolute top-2 left-2 bg-orange-400 text-white text-xs font-semibold px-2 py-1 rounded-full">
+          {{product.discountPercentage}}%
+        </span>
+        <!-- Wishlist Icon -->
+        <button
+          class="absolute top-2 right-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center"
+          (click)="onWishListClick()"
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 text-black-600"
+            [class.fill-red-500]="isWishList()"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </button>
+        <!-- Product Image -->
+      <div>
+          <img
+          [src]="product.images[0]"
+          [alt]="product.title"
+          class="object-contain w-full h-[270px] fill"
+        />
+      </div>
+      </div>
+      <!-- Product Details -->
+      <div class="mt-4 flex flex-col items-center">
+        <h3 class="text-black-800 font-medium text-base">
+          {{product.title}}
+        </h3>
+        <p class="uppercase text-Black text-xs font-medium mt-1">
+          {{product.category}}
+        </p>
+        <div class="mt-1">
+          <p class="uppercase text-black-600 text-xs font-medium">
+          <span class="text-yellow-500">★</span> {{ product.rating }}
+        </p>
+        </div>
+        <div class="flex gap-2 items-baseline">
+          <p class="text-black-600 text-xs font-medium">
+          <span class="text-black">
+            Available: 
+          </span> 
+        </p> 
+          <p [ngStyle]="{ 'color': product.stock > 0 ? 'green' : 'red' }">{{ product.stock }}</p>
+        </div>
+        <!-- Pricing -->
+        <div class="flex items-end justify-between">
+          <div class="flex items-baseline space-x-2 mt-2">
+            <span class="text-black-400 text-sm line-through">{{ productOriginalrice(product.price, product.discountPercentage) | currency}}</span>
+          <span class="text-black text-xl font-semibold">{{product.price | currency}}</span>
+        </div>
+      </div>
+      <div class="flex gap-1 mt-2 justify-between">
+          <button class="rounded-md bg-black text-white px-2 py-1"
+            [disabled]="product.stock < 1"
+            (click)="onAddToCartClick()"
+          >
+              Add to cart
+          </button>
+          @if(showDetailsBtn){
+            <button class="rounded-md bg-black text-white px-2 py-1"
+            (click)="navigateToProductDetails()"
+          >
+            Product Details
+          </button>
+          }
+      </div>
+      </div>
+    </div>
