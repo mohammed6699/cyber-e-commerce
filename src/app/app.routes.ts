@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { EmptyLayout } from './Layouts/empty-layout/empty-layout';
 import { MainLayout } from './Layouts/main-layout/main-layout';
+import { authGuard } from './Guards/auth-guard';
 
 export const routes: Routes = [
     {
@@ -43,10 +44,12 @@ export const routes: Routes = [
             },
             {
                 path: 'wishlist',
+                canActivate: [authGuard],
                 loadComponent: () => import('./Features/wish-list/wish-list').then(x => x.WishList)
             },
             {
                 path: 'checkout',
+                canActivate: [authGuard],
                 loadComponent: () => import('./Features/checkout-page/checkout-page').then(x => x.CheckoutPage)
             }
         ]
