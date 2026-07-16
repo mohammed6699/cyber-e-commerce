@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+@import '@ngxpert/hot-toast/styles.css';
+
+body.rtl-mode {
+  .ms-auto {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  .me-3 {
+    margin-right: 0 !important;
+    margin-left: 1rem !important;
+  }
+
+  .text-start {
+    text-align: right !important;
+  }
+
+  .text-end {
+    text-align: left !important;
+  }
+
+  .table-responsive .dropdown-menu {
+    z-index: 1050 !important;
+  }
+
+  .search-container {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+
+  .user-profile .avatar {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+
+  .dropdown-menu {
+    text-align: right;
+  }
+
+  /* Fix for input-group border-radius in RTL */
+  .input-group > .form-control:first-child {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 0.375rem !important;
+    border-bottom-right-radius: 0.375rem !important;
+  }
+
+  .input-group > .btn:last-child {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: 0.375rem !important;
+    border-bottom-left-radius: 0.375rem !important;
+  }
+
+  #sidebar {
+    left: auto; 
+    right: 0;    
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); 
+  }
+
+  #sidebar.hide {
+    right: -250px; 
+    margin-left: 0 !important; 
+  }
+
+  @media (max-width: 768px) {
+    #sidebar {
+      right: -250px; 
+      left: auto;
+      margin-left: 0 !important;
+    }
+    #sidebar.hide { 
+      right: 0;
+      margin-left: 0 !important;
+    }
+  }
+
+  .content {
+    margin-left: 0 !important; 
+    margin-right: 250px !important; 
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      margin-right: 0 !important; 
+    }
+  }
+  ul.components {
+    li {
+      &.active > a {
+        border-left: none !important;
+        border-right: 6px solid var(--secondary-yellow) !important;
+        border-radius: 5px 0 0 5px !important;
+      }
+
+      a:hover {
+        border-left: none !important;
+        border-right: 6px solid var(--secondary-yellow) !important;
+        border-radius: 5px 0 0 5px !important;
+      }
+    }
+    ul.submenu li a:hover { 
+        border-left: none !important;
+        border-right: 6px solid var(--secondary-yellow) !important;
+    }
+  }
+}
