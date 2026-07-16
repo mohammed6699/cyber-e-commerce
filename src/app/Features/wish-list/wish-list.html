@@ -1,0 +1,9 @@
+<section class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-4 gap-[16px]">
+        @for(item of filteredItems; track item.id) {
+            <app-product-card [product]="item"
+            (addToCart)="addTocart($event)"
+            ></app-product-card>
+        }
+    </div>
+</section>
