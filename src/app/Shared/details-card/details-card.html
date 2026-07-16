@@ -1,0 +1,153 @@
+<section
+  class="font-['Poppins'] flex items-center justify-center bg-opacity-20 h-[100vh]"
+>
+  <div
+    class="flex w-[1300px] p-10 bg-white"
+  >
+    <div class="flex flex-col gap-14 items-center">
+      @for(img of product?.images; track $index){
+        <div class="flex flex-col gap-3">
+        <img
+          class="w-20 h-[90px]"
+          src="{{img}}"
+          alt=""
+        />
+      </div>
+      }
+    </div>
+    <img class="w-[556px] ml-3 mr-6" src="{{ product?.thumbnail }}" [alt]="product.title" />
+    <div>
+      <div class="flex gap-2 items-center">
+        <h1 class="text-[36px] leading-[44px] font-semibold text-black">
+          {{ product.title }}
+        </h1>
+      </div>
+      <div class="h-9 mt-5 justify-start items-center gap-3 inline-flex">
+        <div class="justify-start items-center gap-1 flex">
+            <!-- original price -->
+          <div
+            class="text-[#b3b3b3] text-xl font-normal line-through leading-[30px]"
+          >
+            {{product.price| currency }}
+          </div>
+            <!-- ACTUAL PRICE           -->
+          <div class="text-[#2c732f] text-2xl font-medium leading-9">
+              {{productOriginalPrice(product.price, product.discountPercentage) | currency }}
+            </div>
+            <!-- discount -->
+            <div
+            class="px-2.5 py-[3px] bg-[#e94b48]/10 rounded-[30px] text-[#e94b48] text-sm font-medium leading-[21px]"
+            >
+              {{(product.discountPercentage | percent)}} Off
+            </div>
+        </div>
+      </div>
+      <div class="h-14 flex w-full justify-between items-center">
+        <div class="justify-start items-center gap-2 flex">
+          <span class="text-[#191919] text-xl font-normal leading-[21px]"
+            >Brand:</span
+          >
+          <div class="flex flex-col justify-center">
+           <p class="text-lg">{{product.brand}}</p>
+          </div>
+        </div>
+        <div class="justify-start items-center gap-2 flex">
+          <span class="text-[#191919] text-xl font-normal leading-[21px]">
+            Available Stock:
+          </span>
+          <div class="w-14 h-14 flex flex-col justify-center">
+           <p class="text-lg">{{product.stock}}</p>
+          </div>
+        </div>
+      </div>
+      <p
+        class="w-[500px] text-justify text-[#7f7f7f] text-sm font-normal mt-4 leading-[21px]"
+      >
+        {{product.description}}
+      </p>
+      <!-- quantity selector -->
+      <div
+          class="p-2 bg-white w-[150px] h-14 border border-neutral-200 flex justify-center items-center"
+        >
+          <button class="w-[34px] h-[34px]" (click)="decrement()">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.33398 7H11.6673"
+                stroke="#666666"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </button>
+          <input
+            type="number"
+            [(ngModel)]="quantity"
+            min="1"
+            [max]="product.stock"
+            class="w-10 text-center text-[#191919] text-base font-normal leading-normal"
+          />
+          <button class="flex items-center justify-end w-[34px] h-[34px]" (click)="increment()">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.33398 6.99998H11.6673M7.00065 2.33331V11.6666V2.33331Z"
+                stroke="#1A1A1A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </button>
+      </div>
+      <div
+        class="h-[88px] mt-6 py-[18px] bg-white shadow-[0px_1px_0px_0px_rgba(229,229,229,1.00)] shadow-[0px_-1px_0px_0px_rgba(229,229,229,1.00)] border border-white justify-center items-center gap-3 flex"
+      >
+      
+      <!-- buttons -->
+       <div class="flex justify-between w-full">
+           <button class="rounded-md bg-white text-black border border-2 px-2 py-1 w-[240px]"
+            (click)="onWishListClick()"
+          >
+            Add to Wishlist
+        </button>
+          <button class="rounded-md bg-black text-white px-2 py-1 w-[240px]"
+            [disabled]="product.stock < 1"
+            (click)="onAddToCartClick()"
+          >
+              Add to cart
+          </button>
+      </div>
+      </div>
+      <div
+        class="h-[54px] mt-6 flex-col justify-start items-start gap-3 inline-flex"
+      >
+        <div class="justify-start items-start gap-1.5 inline-flex">
+          <span class="text-[#191919] text-sm font-medium leading-[21px]"
+            >Category:</span
+          ><span class="text-[#7f7f7f] text-sm font-normal leading-[21px]"
+            >{{product.category}}</span
+          >
+        </div>
+        <div class="justify-start items-start gap-1.5 inline-flex">
+          <span class="text-[#191919] text-sm font-medium leading-[21px]">Tag:</span>
+          @for(tag of product.tags; track $index){
+            <span class="text-[#7f7f7f] text-sm font-normal leading-[21px]">
+                {{tag}}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
