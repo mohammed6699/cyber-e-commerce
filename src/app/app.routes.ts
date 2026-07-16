@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { EmptyLayout } from './Layouts/empty-layout/empty-layout';
 import { MainLayout } from './Layouts/main-layout/main-layout';
 import { authGuard } from './Guards/auth-guard';
+import { productResolver } from './Resolvers/product.resolver';
+import { categoryResolver } from './Resolvers/categoryresolver';
 
 export const routes: Routes = [
     {
@@ -24,7 +26,9 @@ export const routes: Routes = [
         component: MainLayout,
         children: [
             {
-                path: 'home', loadComponent: () => import('./Features/home-page/home-page').then(x => x.HomePage)
+                path: 'home',
+                resolve: { products: productResolver, categories: categoryResolver },
+                loadComponent: () => import('./Features/home-page/home-page').then(x => x.HomePage)
             },
             {
                 path: 'about-us',

@@ -1,0 +1,11 @@
+@if(products){
+<div class="flex-1 h-[272px] flex overflow-hidden bg-[#EDEDED]">
+    <div class="w-[130px] shrink-0 h-full">
+        <img [src]="products[0].thumbnail" class="w-full h-full object-cover" />
+    </div>
+    <div class="flex flex-col gap-[16px] px-[16px] py-[16px] flex-1 min-w-0 justify-center">
+        <h1 class="font-medium text-[20px] leading-[28px] truncate">{{products[0].title}}</h1>
+        <p class="text-[13px] leading-[20px] text-[#909090] line-clamp-3">{{products[0].description}}</p>
+    </div>
+</div>
+}

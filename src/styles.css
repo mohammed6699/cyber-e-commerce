@@ -2,7 +2,9 @@
 
 @import 'tailwindcss';
 @import '@ngxpert/hot-toast/styles.css';
-
+body{
+  font-family: 'Inter', sans-serif;
+}
 body.rtl-mode {
   .ms-auto {
     margin-left: 0 !important;
@@ -106,5 +108,13 @@ body.rtl-mode {
         border-left: none !important;
         border-right: 6px solid var(--secondary-yellow) !important;
     }
+  }
+}
+.page{
+  @apply mx-[160px];
+}
+@media (max-width: 768px) {
+  .page{
+    @apply mr-0 ml-0;
   }
 }
