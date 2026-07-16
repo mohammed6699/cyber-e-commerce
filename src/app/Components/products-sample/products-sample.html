@@ -1,1 +1,25 @@
-<p>products-sample works!</p>
+<section class="page my-10">
+    <!-- Category Tabs -->
+    <div class="flex gap-4 mb-6">
+        @for (cat of categories.slice(0, 3); track cat.name) {
+            <button 
+                (click)="onCategorySelect(cat.slug)"
+                [class.underline-offset-4]="selectedCategories.includes(cat.slug)"
+                [class.underline]="selectedCategories.includes(cat.slug)"
+                class="px-4 py-2">
+                {{cat.name}}
+            </button>
+        }
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-4 gap-[16px]">
+        @for (product of filteredProducts; track product.id) {
+            <app-product-card 
+                [product]="product" 
+                [showDetailsBtn]="false"
+                (addToCart)="onAddToCart($event)"
+            />
+        }
+    </div>
+</section>

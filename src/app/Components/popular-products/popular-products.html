@@ -1,1 +1,13 @@
-<p>popular-products works!</p>
+@if(products){
+    <section class="w-full grid grid-cols-4 gap-0 shrink-0">
+    @for(prd of products.slice(0,4); track prd.id; let i = $index){
+        <div [ngClass]="'card-bg-' + i">
+            <app-popular-proucts-card
+            [product]="prd"
+            [isLast]="i === 3"
+            (addToCart)="onAddToCart($event)"
+            />
+        </div>
+    }
+</section>
+}

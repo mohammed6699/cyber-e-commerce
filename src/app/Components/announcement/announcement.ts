@@ -3,11 +3,11 @@ import { ProductModel } from '../../Models/Product.model';
 import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-announcement',
   imports: [RouterLink],
-  templateUrl: './hero.html',
-  styleUrl: './hero.css',
+  templateUrl: './announcement.html',
+  styleUrl: './announcement.css',
 })
-export class Hero {
+export class Announcement {
   @Input() products: ProductModel[] = [];
 }
