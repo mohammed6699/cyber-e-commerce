@@ -1,0 +1,13 @@
+<section class="page my-10">
+    <h1 class="font-medium text-[24px] leading-[32px] mb-[32px]">Discounts up to -50%</h1>
+    <!-- Products Grid -->
+    <div class="grid grid-cols-4 gap-[16px]">
+        @for (product of products.filter(p => p.discountPercentage >= 5).slice(0,4); track product.id) {
+            <app-product-card 
+                [product]="product" 
+                [showDetailsBtn]="false"
+                (addToCart)="addTocart($event)"
+            />
+        }
+    </div>
+</section>
