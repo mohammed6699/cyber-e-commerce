@@ -2,6 +2,9 @@
 
 @import 'tailwindcss';
 @import '@ngxpert/hot-toast/styles.css';
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
 body{
   font-family: 'Inter', sans-serif;
 }
@@ -112,6 +115,15 @@ body.rtl-mode {
 }
 .page{
   @apply mx-[160px];
+}
+.text-res{
+  @apply font-light text-[34px] leading-[40px]
+}
+.desc-res{
+  @apply font-medium text-[16px] leading-[24px] text-[#909090]
+}
+.cat-res {
+  @apply w-full grid grid-cols-2 gap-[16px] 
 }
 @media (max-width: 768px) {
   .page{

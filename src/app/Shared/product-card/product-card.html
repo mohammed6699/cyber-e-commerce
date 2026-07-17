@@ -1,4 +1,4 @@
- <div class="w-[266.33px] min-w-[200px] rounded-[9px] shadow-md p-4 bg-[#F6F6F6]">
+ <div class="w-full h-auto rounded-[9px] shadow-md p-4 bg-[#F6F6F6]">
       <!-- Discount Badge -->
       <div class="relative">
         <span
@@ -28,14 +28,14 @@
           <img
           [src]="product.images[0]"
           [alt]="product.title"
-          class="object-contain w-full h-[270px] fill"
+          class="object-contain w-full h-[150px] md:h-[270px]"
         />
       </div>
       </div>
       <!-- Product Details -->
-      <div class="mt-4 flex flex-col items-center">
+      <div class="mt-4 flex flex-col items-center w-full">
         <h3 class="text-black-800 font-medium text-base">
-          {{product.title}}
+          {{product.title.slice(0, 10) + '...'}}
         </h3>
         <p class="uppercase text-Black text-xs font-medium mt-1">
           {{product.category}}

@@ -1,33 +1,31 @@
 <section class="bg-gradient-to-r from-[#211C24] to-[#211C24]">
-    <div class="page pt-[188px] pb-[188px]">
-        <!-- right side data -->
+    <div class="page py-[60px] md:py-[188px]">
         @if(products){
-            <div class="flex justify-between items-center">
-            <div>
-                <img [src]="products[0].thumbnail"/>
-            </div>
-                <div class="w-[714px] flex flex-col gap-[24px]">
-                <div class="flex flex-col gap-[48px]">
-                    <h1 class="font-thin text-[72px] leading-[72px] text-white spacing-[-1px]">Big Summer 
-                        <span class="font-light text-[72px] leading-[72px] text-white">Sale</span>
-                    </h1>
-                    <p class="text-[18px] leading-[24px] text-[#909090]">Up to 60% off on all products. Don't miss out on this limited-time offer!</p>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-[40px] md:gap-0">
+                <!-- first image -->
+                <div>
+                    <img [src]="products[0].thumbnail" class="max-w-[200px] md:max-w-none"/>
                 </div>
-                <div class="flex mx-[188px]">
-                    <button
-                    [routerLink]="'/products'" 
-                    class="h-[56px] py-[16px] px-[56px] border border-1 border-white rounded-[6px] text-white text-center font-semibold text-[16px] ">
-                        show more
-                    </button>
-                </div> 
+                <div class="w-full md:w-[714px] flex flex-col gap-[24px] items-center md:items-start text-center md:text-start">
+                    <div class="flex flex-col gap-[24px]">
+                        <h1 class="font-thin text-[40px] md:text-[72px] leading-[48px] md:leading-[72px] text-white tracking-[-1px]">Big Summer 
+                            <span class="font-light text-[40px] md:text-[72px] leading-[48px] md:leading-[72px] text-white">Sale</span>
+                        </h1>
+                        <p class="text-[16px] md:text-[18px] leading-[20px] md:leading-[24px] text-[#909090]">Up to 60% off on all products. Don't miss out on this limited-time offer!</p>
+                    </div>
+                    
+                    <div class="flex justify-center md:justify-start w-full">
+                        <button
+                        [routerLink]="'/products'" 
+                        class="h-[56px] py-[16px] px-[40px] md:px-[56px] border border-1 border-white rounded-[6px] text-white font-semibold text-[16px] flex items-center justify-center gap-[12px]">
+                            show more
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <img [src]="products[0].thumbnail" class="max-w-[200px] md:max-w-none"/>
+                </div>
             </div>
-            <!-- left side image -->
-            <div>
-                <img [src]="products[0].thumbnail"/>
-            </div>
-        </div>
         }
-        
-        
     </div>
 </section>

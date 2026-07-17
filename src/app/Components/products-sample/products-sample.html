@@ -1,6 +1,6 @@
-<section class="page my-10">
+<section class="page mt-[300px] md:my-10">
     <!-- Category Tabs -->
-    <div class="flex gap-4 mb-6">
+    <div class="flex justify-between w-full md:px-0 md:justify-start gap-4 mb-6">
         @for (cat of categories.slice(0, 3); track cat.name) {
             <button 
                 (click)="onCategorySelect(cat.slug)"
@@ -13,7 +13,7 @@
     </div>
 
     <!-- Products Grid -->
-    <div class="grid grid-cols-4 gap-[16px]">
+    <div class="grid grid-cols-2 gap-[16px] px-[16px] md:gap-[24px] md:px-0 md:grid-cols-4">
         @for (product of filteredProducts; track product.id) {
             <app-product-card 
                 [product]="product" 
