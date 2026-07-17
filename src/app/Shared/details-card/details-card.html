@@ -1,89 +1,74 @@
 <section
-  class="font-['Poppins'] flex items-center justify-center bg-opacity-20 h-[100vh]"
+  class="font-['Poppins'] flex flex-col items-center justify-center"
 >
   <div
-    class="flex w-[1300px] p-10 bg-white"
+    class="flex flex-col md:flex-row p-4 md:p-10 bg-white w-full md:max-w-[1300px]"
   >
-    <div class="flex flex-col gap-14 items-center">
+  <!-- images wrapper -->
+    <div class="flex flex-col-reverse md:flex-row gap-4 items-center">
+        <div class="flex md:flex-col gap-4 md:gap-14 items-center mb-4 md:mb-0">
       @for(img of product?.images; track $index){
         <div class="flex flex-col gap-3">
         <img
-          class="w-20 h-[90px]"
+          class="w-16 h-[70px] md:w-20 md:h-[90px] object-cover"
           src="{{img}}"
           alt=""
         />
       </div>
       }
+        </div>
+        <img class="w-full md:w-[556px] h-auto object-contain md:ml-3 md:mr-6 mb-4 md:mb-0" src="{{ product?.thumbnail }}" [alt]="product.title" />
     </div>
-    <img class="w-[556px] ml-3 mr-6" src="{{ product?.thumbnail }}" [alt]="product.title" />
-    <div>
+    <div class="w-full">
       <div class="flex gap-2 items-center">
-        <h1 class="text-[36px] leading-[44px] font-semibold text-black">
+        <h1 class="text-2xl md:text-[36px] md:leading-[44px] font-semibold text-black">
           {{ product.title }}
         </h1>
       </div>
-      <div class="h-9 mt-5 justify-start items-center gap-3 inline-flex">
-        <div class="justify-start items-center gap-1 flex">
+      <div class="mt-5 flex flex-col items-start">
+        <div class="flex items-center gap-3">
             <!-- original price -->
           <div
-            class="text-[#b3b3b3] text-xl font-normal line-through leading-[30px]"
+            class="text-[#b3b3b3] text-lg md:text-xl font-normal line-through"
           >
             {{product.price| currency }}
           </div>
             <!-- ACTUAL PRICE           -->
-          <div class="text-[#2c732f] text-2xl font-medium leading-9">
+          <div class="text-[#2c732f] text-xl md:text-2xl font-medium">
               {{productOriginalPrice(product.price, product.discountPercentage) | currency }}
             </div>
             <!-- discount -->
             <div
-            class="px-2.5 py-[3px] bg-[#e94b48]/10 rounded-[30px] text-[#e94b48] text-sm font-medium leading-[21px]"
+            class="px-2.5 py-[3px] bg-[#e94b48]/10 rounded-[30px] text-[#e94b48] text-xs md:text-sm font-medium"
             >
               {{(product.discountPercentage | percent)}} Off
             </div>
         </div>
       </div>
-      <div class="h-14 flex w-full justify-between items-center">
-        <div class="justify-start items-center gap-2 flex">
-          <span class="text-[#191919] text-xl font-normal leading-[21px]"
-            >Brand:</span
+      <div class="mt-6 flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <span class="text-[#191919] text-lg md:text-xl font-normal"
+            >Brand: {{product.brand}}</span
           >
-          <div class="flex flex-col justify-center">
-           <p class="text-lg">{{product.brand}}</p>
-          </div>
         </div>
-        <div class="justify-start items-center gap-2 flex">
-          <span class="text-[#191919] text-xl font-normal leading-[21px]">
-            Available Stock:
+        <div class="flex items-center gap-2">
+          <span class="text-[#191919] text-lg md:text-xl font-normal">
+            Available Stock: {{product.stock}}
           </span>
-          <div class="w-14 h-14 flex flex-col justify-center">
-           <p class="text-lg">{{product.stock}}</p>
-          </div>
         </div>
       </div>
       <p
-        class="w-[500px] text-justify text-[#7f7f7f] text-sm font-normal mt-4 leading-[21px]"
+        class="w-full text-justify text-[#7f7f7f] text-sm font-normal mt-4 leading-[21px]"
       >
         {{product.description}}
       </p>
       <!-- quantity selector -->
       <div
-          class="p-2 bg-white w-[150px] h-14 border border-neutral-200 flex justify-center items-center"
+          class="p-2 bg-white w-[150px] h-14 border border-neutral-200 flex justify-center items-center mt-4"
         >
           <button class="w-[34px] h-[34px]" (click)="decrement()">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.33398 7H11.6673"
-                stroke="#666666"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.33398 7H11.6673" stroke="#666666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </button>
           <input
@@ -94,56 +79,42 @@
             class="w-10 text-center text-[#191919] text-base font-normal leading-normal"
           />
           <button class="flex items-center justify-end w-[34px] h-[34px]" (click)="increment()">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.33398 6.99998H11.6673M7.00065 2.33331V11.6666V2.33331Z"
-                stroke="#1A1A1A"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.33398 6.99998H11.6673M7.00065 2.33331V11.6666V2.33331Z" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </button>
       </div>
       <div
-        class="h-[88px] mt-6 py-[18px] bg-white shadow-[0px_1px_0px_0px_rgba(229,229,229,1.00)] shadow-[0px_-1px_0px_0px_rgba(229,229,229,1.00)] border border-white justify-center items-center gap-3 flex"
+        class="mt-6 flex flex-row gap-3"
       >
-      
+
       <!-- buttons -->
-       <div class="flex justify-between w-full">
-           <button class="rounded-md bg-white text-black border border-2 px-2 py-1 w-[240px]"
+           <button class="rounded-md bg-white text-black border border-2 px-2 py-3 w-full md:w-[240px]"
             (click)="onWishListClick()"
           >
             Add to Wishlist
         </button>
-          <button class="rounded-md bg-black text-white px-2 py-1 w-[240px]"
+          <button class="rounded-md bg-black text-white px-2 py-3 w-full md:w-[240px]"
             [disabled]="product.stock < 1"
             (click)="onAddToCartClick()"
           >
               Add to cart
           </button>
       </div>
-      </div>
       <div
-        class="h-[54px] mt-6 flex-col justify-start items-start gap-3 inline-flex"
+        class="mt-6 flex-col justify-start items-start gap-3 inline-flex"
       >
         <div class="justify-start items-start gap-1.5 inline-flex">
-          <span class="text-[#191919] text-sm font-medium leading-[21px]"
+          <span class="text-[#191919] text-sm font-medium"
             >Category:</span
-          ><span class="text-[#7f7f7f] text-sm font-normal leading-[21px]"
+          ><span class="text-[#7f7f7f] text-sm font-normal"
             >{{product.category}}</span
           >
         </div>
         <div class="justify-start items-start gap-1.5 inline-flex">
-          <span class="text-[#191919] text-sm font-medium leading-[21px]">Tag:</span>
+          <span class="text-[#191919] text-sm font-medium">Tag:</span>
           @for(tag of product.tags; track $index){
-            <span class="text-[#7f7f7f] text-sm font-normal leading-[21px]">
+            <span class="text-[#7f7f7f] text-sm font-normal">
                 {{tag}}</span>
           }
         </div>
