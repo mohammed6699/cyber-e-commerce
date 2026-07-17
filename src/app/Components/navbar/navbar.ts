@@ -1,5 +1,5 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../Services/Product.service';
@@ -13,12 +13,19 @@ import { WishListService } from '../../Services/WishList.service';
 })
 export class Navbar {
   searchQuery: string = ''
+  isMenuOpen: boolean = false;
+
   constructor(
     private productService: ProductService,
     private router: Router,
     public cartSer: CartService,
     public wishlistSer: WishListService
   ){}
+  
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
   onSearch(q: string){
     this.productService.search = q;
   }

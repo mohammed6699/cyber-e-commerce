@@ -11,3 +11,30 @@
     background-color: #2C2C2C;
     color: #FFFFFF;
 }
+
+/* Hide desktop grid on small screens */
+.grid {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    /* Show desktop grid on medium screens and up */
+    .grid {
+        display: grid;
+    }
+}
+
+/* Customize Swiper container styles for mobile */
+swiper-container {
+    --swiper-pagination-color: #2C2C2C;
+    --swiper-pagination-bullet-inactive-color: #A3A3A3;
+    --swiper-pagination-bullet-inactive-opacity: 0.5;
+    padding-bottom: 30px; /* Extra space for pagination */
+}
+
+/* Ensure slides display correctly */
+swiper-slide {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,7 +1,7 @@
-<section class="page my-10">
-    <h1 class="font-medium text-[24px] leading-[32px] mb-[32px]">Discounts up to -50%</h1>
+<section class="mt-[300px] md:my-10">
+    <h1 class="text-center md:text-left font-medium text-[24px] leading-[32px] mb-[32px]">Discounts up to -20%</h1>
     <!-- Products Grid -->
-    <div class="grid grid-cols-4 gap-[16px]">
+    <div class="grid grid-cols-2 gap-[16px] px-[16px] md:gap-[24px] md:px-0 md:grid-cols-4">
         @for (product of products.filter(p => p.discountPercentage >= 5).slice(0,4); track product.id) {
             <app-product-card 
                 [product]="product" 

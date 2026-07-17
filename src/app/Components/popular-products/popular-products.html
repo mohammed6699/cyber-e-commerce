@@ -1,5 +1,22 @@
 @if(products){
-    <section class="w-full grid grid-cols-4 gap-0 shrink-0">
+    <swiper-container
+    class="w-full md:hidden mt-[56px]"
+    slides-per-view="1.2"
+    pagination="true"
+    grab-cursor="true"
+    >
+        @for(prd of products.slice(4,8); track prd.id; let i = $index){
+        <swiper-slide [ngClass]="'card-bg-' + i">
+            <app-popular-proucts-card
+            [product]="prd"
+            [isLast]="i === 3"
+            (addToCart)="onAddToCart($event)"
+            />
+        </swiper-slide>
+    }
+    </swiper-container>
+
+    <section class="hidden md:grid w-full grid-cols-4 gap-0 shrink-0">
     @for(prd of products.slice(0,4); track prd.id; let i = $index){
         <div [ngClass]="'card-bg-' + i">
             <app-popular-proucts-card
