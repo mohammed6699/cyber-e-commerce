@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../Services/Product.service';
 import { HotToastService } from '@ngxpert/hot-toast';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { SearchProducts, ProductModel, ProductListModel } from '../../Models/Product.model';
 import { Subscription } from 'rxjs';
 import { CurrencyPipe, NgStyle } from '@angular/common';
@@ -12,7 +12,7 @@ import { WishListService } from '../../Services/WishList.service';
 
 @Component({
   selector: 'app-product-page',
-  imports: [CurrencyPipe, NgStyle, ProductCard],
+  imports: [CurrencyPipe, NgStyle, ProductCard, RouterLink],
   templateUrl: './product-page.html',
   styleUrl: './product-page.css',
 })
@@ -33,6 +33,7 @@ export class ProductPage implements OnInit, OnDestroy {
   productNum!: number;
   sortProduct: string[] = [];
   currentSort: string = 'Sort: Featured';
+  isFilterOpen: boolean = false;
   get totalPages(): number {
     return Math.ceil(this.total / this.pageSize) || 1;
   }
@@ -45,6 +46,11 @@ export class ProductPage implements OnInit, OnDestroy {
     private cartSer: CartService,
     private wishlistSer: WishListService
   ) { }
+  
+  toggleFilter(): void {
+    this.isFilterOpen = !this.isFilterOpen;
+  }
+
   ngOnInit(): void {
     import('rxjs').then(({ combineLatest }) => {
       this.searchSub = combineLatest([

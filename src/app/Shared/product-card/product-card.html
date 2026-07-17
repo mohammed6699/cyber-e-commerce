@@ -1,4 +1,4 @@
- <div class="w-full h-auto rounded-[9px] shadow-md p-4 bg-[#F6F6F6]">
+<div class="w-full h-auto rounded-[9px] shadow-md p-4 bg-[#F6F6F6]">
       <!-- Discount Badge -->
       <div class="relative">
         <span
@@ -34,7 +34,7 @@
       </div>
       <!-- Product Details -->
       <div class="mt-4 flex flex-col items-center w-full">
-        <h3 class="text-black-800 font-medium text-base">
+        <h3 class=" text-center text-black-800 font-medium text-base">
           {{product.title.slice(0, 10) + '...'}}
         </h3>
         <p class="uppercase text-Black text-xs font-medium mt-1">
@@ -55,25 +55,18 @@
         </div>
         <!-- Pricing -->
         <div class="flex items-end justify-between">
-          <div class="flex items-baseline space-x-2 mt-2">
+          <div class="flex flex-col md:flex-row items-baseline md:space-x-2 mt-2">
+            <span class="text-black font-thin">{{product.price.toFixed(0)| currency}}</span>
             <span class="text-black-400 text-sm line-through">{{ productOriginalrice(product.price, product.discountPercentage) | currency}}</span>
-          <span class="text-black text-xl font-semibold">{{product.price | currency}}</span>
         </div>
       </div>
       <div class="flex gap-1 mt-2 justify-between">
-          <button class="rounded-md bg-black text-white px-2 py-1"
+          <button class="text-[15px] rounded-md bg-black text-white px-2 py-1"
             [disabled]="product.stock < 1"
             (click)="onAddToCartClick()"
           >
-              Add to cart
+              Buy Now
           </button>
-          @if(showDetailsBtn){
-            <button class="rounded-md bg-black text-white px-2 py-1"
-            (click)="navigateToProductDetails()"
-          >
-            Product Details
-          </button>
-          }
       </div>
       </div>
-    </div>
+</div>
