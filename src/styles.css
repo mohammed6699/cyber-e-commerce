@@ -125,8 +125,12 @@ body.rtl-mode {
 .cat-res {
   @apply w-full grid grid-cols-2 gap-[16px] 
 }
-@media (max-width: 768px) {
-  .page{
-    @apply mr-0 ml-0;
-  }
+.address.text{
+  @apply font-normal text-[18px] leading-[24px]
+}
+.title{
+  @apply font-medium text-[14px] leading-[16px]
+}
+.desc{
+  @apply font-normal text-[16px] leading-[24px]
 }

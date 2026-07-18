@@ -41,10 +41,24 @@
                 </ul>
 
                 <ul class="flex space-x-10">
-                    <li><a [routerLink]="'/wishlist'" class="relative"><img src="heart.svg" alt="wish list icon"/></a></li>
-                    <li><a [routerLink]="'/cart'" class="relative"><img src="cart.svg" alt="cart icon"/></a></li>
-                    <li><button [routerLink]="'/login'"><img src="User.svg" alt="user profile icon"/></button></li>
+                    <li><a [routerLink]="'/wishlist'" class="relative">
+                        <img src="heart.svg" alt="wish list icon"/>
+                        <span *ngIf="wishlistSer.items().length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{wishlistSer.items().length}}</span>
+                    </a></li>
+                    <li><a [routerLink]="'/cart'" class="relative">
+                        <img src="cart.svg" alt="cart icon"/>
+                        <span *ngIf="cartSer.cartCount() > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{cartSer.cartCount()}}</span>
+                    </a></li>
+                    <li><button [routerLink]="'/profile-page'">
+                        <img src="User.svg" alt="user profile icon"/>
+                    </button></li>
                 </ul>
+                <div class="flex space-x-10">
+                    <a [routerLink]="'/login'" class="relative">
+                        login
+                    </a>
+                    
+                </div>
             </div>
         </div>
 
@@ -56,6 +70,25 @@
                 <li><a [routerLink]="'/categories'" (click)="toggleMenu()">Categories</a></li>
                 <li><a [routerLink]="'/about-us'" (click)="toggleMenu()">About Us</a></li>
             </ul>
+            <ul class="flex justify-between items-center mt-2">
+                    <li><a [routerLink]="'/wishlist'" class="relative">
+                        <img src="heart.svg" alt="wish list icon"/>
+                        <span *ngIf="wishlistSer.items().length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{wishlistSer.items().length}}</span>
+                    </a></li>
+                    <li><a [routerLink]="'/cart'" class="relative">
+                        <img src="cart.svg" alt="cart icon"/>
+                        <span *ngIf="cartSer.cartCount() > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{cartSer.cartCount()}}</span>
+                    </a></li>
+                    <li><button [routerLink]="'/profile-page'">
+                        <img src="User.svg" alt="user profile icon"/>
+                    </button></li>
+                </ul>
+                <div class="flex mt-1">
+                    <a [routerLink]="'/login'" class="flex flex-col space-y-4 text-base font-bold text-black dark:text-white">
+                        login
+                    </a>
+                    
+                </div>
         </div>
     </nav>
 </div>

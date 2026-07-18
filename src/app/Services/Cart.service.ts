@@ -20,6 +20,7 @@ export class CartService{
     deleteCartItem(id:number): void {
         this.cartItems.update((items) => items.filter((item) => item.id !== id))
         localStorage.setItem('cart', JSON.stringify(this.cartItems()));
+        localStorage.removeItem('cartDetails');
     }
     // update product cart items
     updateCartItemQuantity(id: number, quantity: number): void {
