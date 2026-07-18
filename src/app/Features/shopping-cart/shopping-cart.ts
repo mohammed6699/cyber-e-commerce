@@ -3,6 +3,8 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { CartService } from '../../Services/Cart.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductModel } from '../../Models/Product.model';
+import { Router } from '@angular/router';
+import { share } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,10 +17,14 @@ export class ShoppingCart implements OnInit{
   quantity: number = 1;
   product!:ProductModel;
   orderForm!: FormGroup;
-  discount: number = 0
+  discount: number = 0;
+  tax: number = 15;
+  shippigValue: number = 50;
+  cartProces: any = null
   constructor(
     public cartService: CartService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
 ) {}
   totalAmout: number = 0;
   FinalTotalAmout: number = this.totalAmout;
@@ -32,6 +38,7 @@ export class ShoppingCart implements OnInit{
     this.orderForm.valueChanges.subscribe(() => {
       this.calculateTotalPrice(this.orderForm.value);
     })
+    this.calculateTotalPrice(this.orderForm.value);
   }
   poductsInCart(){
     return this.cartService.getCartItems()
@@ -43,14 +50,20 @@ export class ShoppingCart implements OnInit{
   decrement(item: ProductModel): void{
     const currentQty = item.quantity || 1;
     if(currentQty > 1){
-      this.cartService.updateCartItemQuantity(item.id, currentQty - 1)
+      this.cartService.updateCartItemQuantity(item.id, currentQty - 1);
+      this.calculateTotalPrice(this.orderForm.value);
     }
   }
   increment(item: ProductModel){
     const currentQty = item.quantity || 1;
     if(currentQty < item.stock){
-      this.cartService.updateCartItemQuantity(item.id, currentQty + 1)
+      this.cartService.updateCartItemQuantity(item.id, currentQty + 1);
+      this.calculateTotalPrice(this.orderForm.value);
     }
+  }
+  deleteItem(id: number){
+    this.cartService.deleteCartItem(id);
+    this.calculateTotalPrice(this.orderForm.value);
   }
   // cal. product price 
   cartPrice(item:ProductModel){
@@ -70,8 +83,23 @@ export class ShoppingCart implements OnInit{
     if(value.bonusCard && value.bonusCard.length >= 12){
       bonusDiscount = 10;
     }
-    
+    if(this.cartService.cartTotalAmount() > 500){
+      this.shippigValue = 0;
+    }else{
+      this.shippigValue = 50
+    }
     this.discount = promoDiscount + bonusDiscount;
-    this.FinalTotalAmout = Math.max(0, this.totalAmout - this.discount);
+    this.FinalTotalAmout = Math.max(0, this.totalAmout - this.discount) + this.tax + this.shippigValue;
+    this.cartProces = {
+      totalAmout: this.totalAmout,
+      discount: this.discount,
+      tax: this.tax,
+      shippigValue: this.shippigValue,
+      FinalTotalAmout: this.FinalTotalAmout
+    };
+  }
+  navigateToCheckout(){
+    localStorage.setItem('cartDetails', JSON.stringify(this.cartProces))
+    this.router.navigate(['/checkout'])
   }
 }
