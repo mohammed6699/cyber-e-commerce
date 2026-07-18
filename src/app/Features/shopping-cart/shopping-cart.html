@@ -79,7 +79,7 @@
           </button>
           </div>
           <div class="px-2 py-2">{{cartPrice(item) | currency}}</div>
-          <button (click)="cartService.deleteCartItem(item.id)" class="text-red-500 hover:text-red-700">
+          <button (click)="deleteItem(item.id)" class="text-red-500 hover:text-red-700">
                 <img src="Close.svg" alt="delete item icon"/>
               </button>
              </div>
@@ -120,12 +120,12 @@
         <!-- taxes -->
          <div class="flex justify-between mb-2 mt-5">
           <span class="text-[#545454] font-normal text-[16px] leading-[32px]">Estimated Tax</span>
-          <span class="text-black font-normal text-[16px] leading-[32px]">{{50 | currency}}</span>
+          <span class="text-black font-normal text-[16px] leading-[32px]">{{tax | currency}}</span>
         </div>
         <!-- estimated shopping && handling -->
          <div class="flex justify-between mb-2 mt-5">
           <span class="text-[#545454] font-normal text-[16px] leading-[32px]">Estimated Shopping & Handling</span>
-          <span class="text-black font-normal text-[16px] leading-[32px]">{{20 | currency}}</span>
+          <span class="text-black font-normal text-[16px] leading-[32px]">{{shippigValue | currency}}</span>
         </div>
         <div class="flex justify-between text-xl font-bold mt-4 pt-4">
           <span>discount applied:</span>
@@ -135,7 +135,9 @@
           <span>Total:</span>
           <span>{{ FinalTotalAmout | currency }}</span>
         </div>
-        <button class="w-full mt-6 bg-black text-white py-3 rounded-md hover:bg-gray-800 transition">
+        <button 
+        (click)="navigateToCheckout()"
+        class="w-full mt-6 bg-black text-white py-3 rounded-md hover:bg-gray-800 transition">
           Checkout
         </button>
       </div>

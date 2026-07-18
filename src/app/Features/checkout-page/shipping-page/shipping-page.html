@@ -1,0 +1,30 @@
+<section class="md:mr-[160px] md:ml-[160px] p-4">
+    <h1 class="text-2xl font-bold mb-6">Select Shipping Method</h1>
+    
+    <form [formGroup]="shippingForm">
+        @for(ship of shipmentTypes; track ship.id){
+            <div (click)="selectShipment(ship)" 
+                 [class.border-black]="shippingForm.value.method?.id === ship.id"
+                 class="bg-white border border-gray-200 p-4 mb-4 rounded-lg cursor-pointer hover:border-black transition flex justify-between gap-2">
+                <div class="flex items-center gap-3">
+                    <input type="radio" [checked]="shippingForm.value.method?.id === ship.id" class="accent-black">
+                    <span class="font-bold">{{ship.price === 'Free' ? 'Free' : '$' + ship.price}}</span>
+                    <span class="text-black text-xs py-1 px-2 rounded">{{ ship.type }}</span>
+                </div>
+                <p class="text-sm text-gray-500 ml-7">{{ ship.data }}</p>
+                
+                @if(ship.id === 3 && shippingForm.value.method?.id === 3){
+                    <div class="ml-7 mt-2">
+                        <label class="block text-sm font-medium mb-1">Select Date</label>
+                        <input type="date" formControlName="deliveryDate" class="border border-gray-300 rounded-lg py-1 px-2">
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="flex justify-end gap-4 mt-6">
+            <button (click)="navigateBack()" type="button" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">Back</button>
+            <button (click)="submit()" [disabled]="shippingForm.invalid" type="button" class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-400">Next</button>
+        </div>
+    </form>
+</section>

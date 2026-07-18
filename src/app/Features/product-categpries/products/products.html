@@ -1,0 +1,19 @@
+<section class="max-w-[1200px] mx-auto px-4 md:px-0 py-10">
+  <h1 class="text-3xl font-serif font-bold text-stone-900 mb-8 capitalize">
+    {{ selectedCategories[0] }} Products
+  </h1>
+
+  @if (filteredProductList.length > 0) {
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[16px] md:gap-[24px]">
+      @for (product of filteredProductList; track product.id) {
+        <app-product-card 
+          [product]="product" 
+          (addToCart)="onAddToCart($event)"
+          (wishList)="onWishListClick($event)"
+        />
+      }
+    </div>
+  } @else {
+    <p class="text-stone-500 text-center py-10">No products found in this category.</p>
+  }
+</section>

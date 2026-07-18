@@ -1,5 +1,5 @@
 export interface UserModel {
-    email: SVGStringList,
+    email: string,
     password: string,
     userName: string
 }

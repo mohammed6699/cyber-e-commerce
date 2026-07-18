@@ -1,0 +1,80 @@
+<section class="">
+    <div class="flex flex-col justify-center items-center md:items-start md:justify-between">
+        <h1 class="text-2xl font-bold mb-6 text-center md:text-start">Select Address</h1>
+    
+        <button (click)="toggleForm()" class="w-[200px] bg-black text-white px-6 py-2 rounded-lg mb-6 hover:bg-gray-800 transition">
+        {{ isFormVisible ? 'Cancel' : '+ Add New Address' }}
+        </button>
+    </div>
+    
+    @for (addr of addresses; track addr; let i = $index) {
+        <div (click)="selectAddress(addr)" class="bg-white border border-gray-200 p-4 mb-4 rounded-lg cursor-pointer hover:border-black transition flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-500 font-medium">{{addr.place}}</span>
+                    <span class="bg-black text-white text-xs py-1 px-2 rounded">{{ addr.title }}</span>
+                </div>
+                <p class="font-medium text-gray-900">{{ addr.address }}</p>
+                <p class="text-sm text-gray-500">Postcode: {{addr.Postcode}}</p>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button (click)="editAddress(i); $event.stopPropagation()" class="p-2 hover:bg-gray-100 rounded-full">
+                    <img src="To edit.svg" class="w-5 h-5"/>
+                </button>
+                <button (click)="deleteAddress(i); $event.stopPropagation()" class="p-2 hover:bg-gray-100 rounded-full">
+                    <img src="Close.svg" class="w-5 h-5"/>
+                </button>
+            </div>
+        </div>
+    }
+
+    @if(isFormVisible){
+        <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" class="bg-gray-50 p-6 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4 mt-6" #addNewAddress="ngForm">
+            <div class="flex flex-col">
+                <label for="title" class="text-sm font-medium mb-1">Title</label>
+                <input type="text" formControlName="title" class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none">
+                @if(addressForm.get('title')?.hasError('required') && addressForm.get('title')?.touched){
+                        <span class="text-red-500 pt-0.5">this input is required</span>
+                     }@else if (addressForm.get('title')?.errors?.['pattern']) {
+                        <span>Pleaser enter a valide title</span>
+                     }
+            </div>
+            <div class="flex flex-col">
+                <label for="address" class="text-sm font-medium mb-1">Address</label>
+                <input type="text" formControlName="address" class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none">
+                @if(addressForm.get('address')?.hasError('required') && addressForm.get('address')?.touched){
+                        <span class="text-red-500 pt-0.5">this input is required</span>
+                     }@else if (addressForm.get('address')?.errors?.['pattern']) {
+                        <span>Pleaser enter a valide address</span>
+                     }
+            </div>
+            <div class="flex flex-col">
+                <label for="Postcode" class="text-sm font-medium mb-1">Post code</label>
+                <input type="text" formControlName="Postcode" class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none">
+                @if(addressForm.get('Postcode')?.hasError('required') && addressForm.get('Postcode')?.touched){
+                        <span class="text-red-500 pt-0.5">this input is required</span>
+                     }@else if (addressForm.get('Postcode')?.errors?.['pattern']) {
+                        <span>Pleaser enter a valide Postcode</span>
+                     }
+            </div>
+            <div class="flex flex-col">
+                <label for="place" class="text-sm font-medium mb-1">Place</label>
+                <select class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none" formControlName="place">
+                    <option value="Other">Other</option>
+                    <option value="Home">Home</option>
+                    <option value="Office">Office</option>
+                </select>
+                @if(addressForm.get('place')?.hasError('required') && addressForm.get('place')?.touched){
+                        <span class="text-red-500 pt-0.5">this input is required</span>
+                     }@else if (addressForm.get('place')?.errors?.['pattern']) {
+                        <span>Pleaser enter a valide place</span>
+                     }
+            </div>
+            <div class="md:col-span-2 flex justify-end gap-4 mt-2">
+                <button (click)="toggleForm()" type="button" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">Cancel</button>
+                <button [disabled]="!addNewAddress.valid" type="submit" class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Save Address</button>
+            </div>
+        </form> 
+    } 
+</section>

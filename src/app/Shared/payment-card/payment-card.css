@@ -1,0 +1,57 @@
+.card-flip {
+  perspective: 1000px;
+}
+
+.card-inner {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.chip {
+  background: linear-gradient(135deg, #ffd973 0%, #d4a017 50%, #e6bd5a 100%);
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: shimmerEffect 3s infinite;
+}
+
+@keyframes shimmerEffect {
+  0% {
+    transform: translateX(-150%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(150%) rotate(30deg);
+  }
+}

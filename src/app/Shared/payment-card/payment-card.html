@@ -1,0 +1,48 @@
+<div class="card-flip relative w-full mx-auto" style="height: 220px; max-width: 340px;">
+  <div
+    class="card-inner absolute w-full h-full shadow-lg hover:shadow-2xl rounded-2xl transition-shadow duration-300"
+    [class.is-flipped]="isFlipped"
+  >
+    <!-- Front of card -->
+    <div class="card-front absolute w-full h-full bg-gradient-to-br from-gray-800 to-gray-600 rounded-2xl py-5 px-6 shimmer">
+      <div class="flex justify-between items-start">
+        <div class="text-white font-light text-lg tracking-wider">Credit Card</div>
+        <div class="text-white text-2xl font-bold italic">VISA</div>
+      </div>
+
+      <div class="mt-2">
+        <div class="chip w-12 h-9 rounded-md mb-2 bg-yellow-600"></div>
+      </div>
+
+      <div class="text-white text-xl tracking-widest mb-2 font-mono">
+        {{ getCardNumberDisplay() }}
+      </div>
+
+      <div class="flex justify-between text-sm">
+        <div>
+          <div class="text-white opacity-70 text-xs mb-0.5">CARD HOLDER</div>
+          <div class="text-white tracking-wide font-medium">{{ getCardOwnerNameDisplay() }}</div>
+        </div>
+        <div>
+          <div class="text-white opacity-70 text-xs mb-0.5">EXPIRES</div>
+          <div class="text-white tracking-wide font-medium">
+            <span>{{ getExpireMonthDisplay() }}</span>/<span>{{ getExpireYearDisplay() }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back of card -->
+    <div class="card-back absolute w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl">
+      <div class="w-full h-10 bg-black mt-4"></div>
+      <div class="p-5">
+        <div class="text-gray-400 text-xs mb-1">CVV</div>
+        <div class="flex justify-end mb-2">
+          <div class="bg-white w-full h-9 flex items-center justify-end pr-4 rounded">
+            <div class="text-gray-800 tracking-widest">{{ cvvDisplay }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
