@@ -15,6 +15,10 @@
           alt=""
         />
       </div>
+      }@empty {
+        <div appEmptysection>
+          <h1>{{'empty.no_images' | translate}}</h1>
+        </div>
       }
         </div>
         <img class="w-full md:w-[556px] h-auto object-contain md:ml-3 md:mr-6 mb-4 md:mb-0" src="{{ product?.thumbnail }}" [alt]="product.title" />
@@ -31,11 +35,11 @@
           <div
             class="text-[#b3b3b3] text-lg md:text-xl font-normal line-through"
           >
-            {{product.price| currency }}
+            {{product.price| currency: 'EGP' }}
           </div>
             <!-- ACTUAL PRICE           -->
           <div class="text-[#2c732f] text-xl md:text-2xl font-medium">
-              {{productOriginalPrice(product.price, product.discountPercentage) | currency }}
+              {{productOriginalPrice(product.price, product.discountPercentage) | currency: 'EGP' }}
             </div>
             <!-- discount -->
             <div
@@ -116,6 +120,10 @@
           @for(tag of product.tags; track $index){
             <span class="text-[#7f7f7f] text-sm font-normal">
                 {{tag}}</span>
+          }@empty {
+            <div appEmptysection>
+                <h1 class="text-[#7f7f7f] text-sm font-normal">{{'empty.no_tags' | translate}}</h1>
+            </div>
           }
         </div>
       </div>

@@ -13,6 +13,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 export class Login implements OnInit{
   loginForm!: FormGroup;
   private passwordRegex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$';
+  currentLang: any
   constructor(
      private route: Router,
       private toast: HotToastService,
@@ -20,7 +21,8 @@ export class Login implements OnInit{
       private translateSer: TranslateService
   ){}
   ngOnInit(): void {
-    this.buildLoginForm()
+    this.buildLoginForm();
+    this.currentLang = localStorage.getItem('language')
   }
   buildLoginForm(){
     this.loginForm = this.fb.group({
@@ -36,7 +38,10 @@ export class Login implements OnInit{
     let token = 'aaaaaaaaaaaaaaaannnnnnnnnrrrrrrrr8888#########'
     localStorage.setItem('access-token', token);
     localStorage.setItem('user', JSON.stringify(this.loginForm.value));
-    this.toast.success(this.translateSer.instant('login.logged_in_successfully'));
+    this.toast.success(this.translateSer.instant('login.logged_in_successfully'), {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     this.route.navigate(['/home']);
   }
 

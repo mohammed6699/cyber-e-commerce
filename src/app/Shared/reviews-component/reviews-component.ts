@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { ProductCard } from "../product-card/product-card";
 import { CartService } from '../../Services/Cart.service';
 import { ProductService } from '../../Services/Product.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reviews-component',
-  imports: [DatePipe, NgStyle, FormsModule, ProductCard],
+  imports: [DatePipe, NgStyle, FormsModule, ProductCard, TranslatePipe],
   templateUrl: './reviews-component.html',
   styleUrl: './reviews-component.css',
 })

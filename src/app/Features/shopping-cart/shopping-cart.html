@@ -78,7 +78,7 @@
             </svg>
           </button>
           </div>
-          <div class="px-2 py-2">{{cartPrice(item) | currency}}</div>
+          <div class="px-2 py-2">{{cartPrice(item) | currency: 'EGP'}}</div>
           <button (click)="deleteItem(item.id)" class="text-red-500 hover:text-red-700">
                 <img src="Close.svg" alt="delete item icon"/>
               </button>
@@ -121,25 +121,25 @@
           <!-- subtotal -->
         <div class="flex justify-between mb-2 mt-5">
           <span class="text-black font-semibold text-[16px] leading-[24px]">{{'Cart.SubTotal' | translate}}</span>
-          <span class="font-medium text-[16px] leading-[24px]">{{ cartService.cartTotalAmount() | currency }}</span>
+          <span class="font-medium text-[16px] leading-[24px]">{{ cartService.cartTotalAmount() | currency: 'EGP' }}</span>
         </div>
         <!-- taxes -->
          <div class="flex justify-between mb-2 mt-5">
           <span class="text-[#545454] font-normal text-[16px] leading-[32px]">{{'Cart.Estimated_Tax' | translate}}</span>
-          <span class="text-black font-normal text-[16px] leading-[32px]">{{tax | currency}}</span>
+          <span class="text-black font-normal text-[16px] leading-[32px]">{{tax | currency: 'EGP'}}</span>
         </div>
         <!-- estimated shopping && handling -->
          <div class="flex justify-between mb-2 mt-5">
           <span class="text-[#545454] font-normal text-[16px] leading-[32px]">{{'Cart.Estimated_Shopping_&_Handling' | translate}}</span>
-          <span class="text-black font-normal text-[16px] leading-[32px]">{{shippigValue | currency}}</span>
+          <span class="text-black font-normal text-[16px] leading-[32px]">{{shippigValue | currency: 'EGP'}}</span>
         </div>
         <div class="flex justify-between text-xl font-bold mt-4 pt-4">
           <span>{{'Cart.discount_applied' | translate}}:</span>
-          <span>{{ discount | currency }}</span>
+          <span>{{ discount | currency: 'EGP' }}</span>
         </div>
         <div class="flex justify-between text-xl font-bold mt-4 pt-4">
           <span>{{'Cart.Total' | translate}}:</span>
-          <span>{{ FinalTotalAmout | currency }}</span>
+          <span>{{ FinalTotalAmout | currency: 'EGP' }}</span>
         </div>
         <button 
         (click)="navigateToCheckout()"

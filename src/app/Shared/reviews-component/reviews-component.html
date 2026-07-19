@@ -58,5 +58,9 @@
             <p class="text-gray-700">{{rev.comment}}</p>
         </div>
     </section>
+}@empty {
+    <div appEmptysection>
+        <h1>{{'empty.no_reviews' | translate}}</h1>
+    </div>
 }
 </div>

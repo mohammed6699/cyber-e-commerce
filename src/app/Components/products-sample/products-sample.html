@@ -1,4 +1,4 @@
-<section class="md:mr-[160px] md:ml-[160px] mt-[300px] md:my-10">
+<section class="page mt-[300px] md:my-10">
     <!-- Category Tabs -->
     <div class="flex justify-between w-full md:px-0 md:justify-start gap-4 mb-6">
         @for (cat of categories.slice(0, 3); track cat.name) {
@@ -17,7 +17,7 @@
         @for (product of filteredProducts; track product.id) {
             <app-product-card 
                 [product]="product" 
-                [showDetailsBtn]="false"
+                [showDetailsBtn]="true"
                 (addToCart)="onAddToCart($event)"
             />
         }

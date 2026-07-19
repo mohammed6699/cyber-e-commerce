@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriesModel } from '../../Models/Categories.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { CatCard } from "../../directives/cat-card";
 
 @Component({
   selector: 'app-product-categpries',
-  imports: [RouterLink, TranslatePipe],
+  imports: [RouterLink, TranslatePipe, CatCard],
   templateUrl: './product-categpries.html',
   styleUrl: './product-categpries.css',
 })

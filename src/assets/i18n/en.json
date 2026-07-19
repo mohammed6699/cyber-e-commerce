@@ -110,7 +110,8 @@
         "discount_applied": "discount applied",
         "Total": "Total",
         "Checkout": "Checkout",
-        "wish_list_is_empty": "wish list is empty"
+        "wish_list_is_empty": "wish list is empty",
+        "empty_product": "Please add at least one product to continue payment"
     },
     "About": {
         "About_Us": "About Us",
@@ -183,5 +184,19 @@
         "Shipping": "Shipping",
         "step3": "step3",
         "payment": "payment"
+    },
+    "empty": {
+        "no_products": "No products found",
+        "no_images": "No images found",
+        "no_categories": "No categories found",
+        "no_tags": "No tags found",
+        "no_reviews": "No reviews found"
+    },
+    "toasts": {
+        "added_to_cart_succefully": "added to cart succefully",
+        "Product_Details_loaded": "Product Details loaded",
+        "Error_loading_product_details": "Error loading product details",
+        "added_to_cart": "added to cart",
+        "added_to_your_wish_list": "added to your wish list"
     }
 }

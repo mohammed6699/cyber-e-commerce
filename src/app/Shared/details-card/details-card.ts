@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductModel } from '../../Models/Product.model';
 import { CurrencyPipe, PercentPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-details-card',
-  imports: [CurrencyPipe, PercentPipe, FormsModule],
+  imports: [CurrencyPipe, PercentPipe, FormsModule, TranslatePipe],
   templateUrl: './details-card.html',
   styleUrl: './details-card.css',
 })

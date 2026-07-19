@@ -6,23 +6,25 @@ import { CartService } from '../../Services/Cart.service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { ProductService } from '../../Services/Product.service';
 import { Subscription } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Emptysection } from "../../directives/emptysection";
 
 @Component({
   selector: 'app-wish-list',
-  imports: [ProductCard, TranslatePipe],
+  imports: [ProductCard, TranslatePipe, Emptysection],
   templateUrl: './wish-list.html',
   styleUrl: './wish-list.css',
 })
 export class WishList implements OnInit, OnDestroy {
   filteredItems: ProductModel[] = [];
   private searchSub!: Subscription;
-
+  currentLang: any
   constructor (
     public wishlistSer: WishListService,
     private cartSer: CartService,
     private toast: HotToastService,
-    private productSer: ProductService
+    private productSer: ProductService,
+    private translate: TranslateService
   ){}
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class WishList implements OnInit, OnDestroy {
     this.searchSub = this.productSer.search$.subscribe(query => {
       this.filterItems(query);
     });
+    this.currentLang = localStorage.getItem('language')
   }
 
   filterItems(query: string) {
@@ -59,7 +62,10 @@ export class WishList implements OnInit, OnDestroy {
   }
   
   addTocart(product: ProductModel){
-    this.toast.success(`${product.title} added to cart suddefully`);
+    this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_cart')}`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     this.cartSer.addToCart(product);
   }
 }

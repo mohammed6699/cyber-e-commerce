@@ -7,9 +7,10 @@ import { CartService } from '../../Services/Cart.service';
 import { WishListService } from '../../Services/WishList.service';
 import { LanguageService } from '../../Services/Language.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { Button } from "../../directives/button";
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, NgClass, CommonModule, FormsModule, TranslatePipe],
+  imports: [RouterLink, NgClass, CommonModule, FormsModule, TranslatePipe, Button],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })

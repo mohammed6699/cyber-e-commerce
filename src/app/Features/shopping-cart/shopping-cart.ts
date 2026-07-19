@@ -22,7 +22,8 @@ export class ShoppingCart implements OnInit{
   discount: number = 0;
   tax: number = 15;
   shippigValue: number = 50;
-  cartProces: any = null
+  cartProces: any = null;
+  currentLang: any
   constructor(
     public cartService: CartService,
     private fb: FormBuilder,
@@ -43,6 +44,7 @@ export class ShoppingCart implements OnInit{
       this.calculateTotalPrice(this.orderForm.value);
     })
     this.calculateTotalPrice(this.orderForm.value);
+    this.currentLang = localStorage.getItem('language')
   }
   poductsInCart(){
     return this.cartService.getCartItems()
@@ -104,6 +106,15 @@ export class ShoppingCart implements OnInit{
   }
   navigateToCheckout(){
     localStorage.setItem('cartDetails', JSON.stringify(this.cartProces))
-    this.router.navigate(['/checkout'])
+   
+    if(this.cartService.items().length === 0){
+      this.toast.warning(this.translateSer.instant('Cart.empty_product'), {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    })
+      return;
+    }else{
+      this.router.navigate(['/checkout'])
+    }
   }
 }

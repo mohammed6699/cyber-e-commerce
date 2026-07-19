@@ -19,6 +19,7 @@ export class AddressPage implements OnInit{
   codeRegex = '^[0-9]+$';
   titleRegex = "^[a-zA-Z\u0600-\u06FF\s']{4,20}$";
   addRegex = "^[a-zA-Z0-9\u0600-\u06FF\s,.\-\/#]{5,}$";
+  currentLang: any
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -34,6 +35,7 @@ export class AddressPage implements OnInit{
     })
     const savedAddress = localStorage.getItem('useraddress');
     this.addresses = savedAddress ? JSON.parse(savedAddress) : [];
+    this.currentLang = localStorage.getItem('language')
   }
   saveAddress(){
     if(this.addressForm.valid){
@@ -46,9 +48,15 @@ export class AddressPage implements OnInit{
       localStorage.setItem('useraddress', JSON.stringify(this.addresses));
       this.addressForm.reset();
       this.isFormVisible = false
-      this.toast.success(this.transate.instant('Address.Address_saved_successfully'), {duration: 1500})
+      this.toast.success(this.transate.instant('Address.Address_saved_successfully'), {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    })
     }else{
-      this.toast.warning(this.transate.instant('Address.Please_fill_all_the_fields'), {duration: 1500})
+      this.toast.warning(this.transate.instant('Address.Please_fill_all_the_fields'), {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    })
     }
   }
   navigateBack(){
@@ -73,6 +81,9 @@ export class AddressPage implements OnInit{
     const addressToEdit = this.addresses[index];
     this.addressForm.patchValue(addressToEdit);
     this.isFormVisible = true;
-    this.toast.success(this.transate.instant('Address.Address_updated_successfully'),{duration: 1500})
+    this.toast.success(this.transate.instant('Address.Address_updated_successfully'),{
+      duration: 1500,
+      position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+  });
   }
 }

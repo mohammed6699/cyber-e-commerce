@@ -114,7 +114,7 @@ body.rtl-mode {
   }
 }
 .page{
-  @apply mx-[160px];
+  @apply md:mr-[160px] md:ml-[160px];
 }
 .text-res{
   @apply font-light text-[34px] leading-[40px]

@@ -3,7 +3,7 @@ import { ProductModel } from '../../Models/Product.model';
 import { ProductCard } from "../../Shared/product-card/product-card";
 import { CartService } from '../../Services/Cart.service';
 import { HotToastService } from '@ngxpert/hot-toast';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -17,13 +17,18 @@ export class DiscountProducts implements OnInit{
   currentLang: any;
   constructor(
     private cartSer: CartService,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private tranlate: TranslateService
   ) {}
   ngOnInit(): void {
     this.currentLang = localStorage.getItem('language');
   }
   addTocart(product: ProductModel){
-    this.toast.success(`${product.title} added to cart succefully`);
+    this.toast.success(`${product.title} ${this.tranlate.instant('toasts.added_to_cart_succefully')}`, 
+      {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     this.cartSer.addToCart(product)
   }
 }

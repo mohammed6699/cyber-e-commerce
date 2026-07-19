@@ -1,4 +1,4 @@
-<div class="w-full flex flex-col items-start gap-[100px] w-[360px] min-w-[280px] h-[640px] pb-[56px]">
+<div class="w-full flex flex-col items-start gap-[100px] w-[360px] min-w-[280px] h-[640px] pb-[56px] cursor-pointer" [routerLink]="['/products/details', product.id]">
       <!-- Product Image -->
       <div class="flex items-center md:flex-shrink-0 pt-[22px] w-[360px] h-[270px]">
           <img
@@ -18,10 +18,10 @@
           {{product.description}}
         </p>
         <div class="flex gap-1 mt-4">
-          <button class="rounded-[6px] border-1 px-4 py-2"
+          <button appPopularBtn
             [ngClass]="isLast ? 'bg-black text-white border-white' : 'bg-none text-black'"
             [disabled]="product.stock < 1"
-            (click)="onAddToCartClick()"
+            (click)="$event.stopPropagation(); onAddToCartClick()"
           >
               {{ isLast ? 'Buy Now' : 'Add to cart' }}
           </button>
