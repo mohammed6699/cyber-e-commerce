@@ -9,10 +9,11 @@ import { CategoriesModel } from '../../Models/Categories.model';
 import { ProductCard } from '../../Shared/product-card/product-card';
 import { CartService } from '../../Services/Cart.service';
 import { WishListService } from '../../Services/WishList.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-page',
-  imports: [CurrencyPipe, NgStyle, ProductCard, RouterLink],
+  imports: [CurrencyPipe, NgStyle, ProductCard, RouterLink, TranslatePipe],
   templateUrl: './product-page.html',
   styleUrl: './product-page.css',
 })
@@ -44,7 +45,8 @@ export class ProductPage implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private cartSer: CartService,
-    private wishlistSer: WishListService
+    private wishlistSer: WishListService,
+    private translateSer: TranslateService
   ) { }
   
   toggleFilter(): void {
@@ -115,8 +117,8 @@ export class ProductPage implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        console.log("Error message", err);
-        this.toast.error("Error loading products")
+        // console.log("Error message", err);
+        this.toast.error(this.translateSer.instant("products.Error_loading_products"))
       }
     })
   }
@@ -146,7 +148,8 @@ export class ProductPage implements OnInit, OnDestroy {
         this.categories = res;
       },
       error: (err) => {
-        console.log("error loading catgories", err)
+        // console.log("error loading catgories", err)
+        this.toast.error(this.translateSer.instant("products.Error_Loading_categories"))
       }
     })
   }
@@ -183,12 +186,12 @@ export class ProductPage implements OnInit, OnDestroy {
   }
   // add to cart
   onAddToCart(product: ProductModel){
-    this.toast.success(`${product.title} added to cart suddefully`);
+    this.toast.success(`${product.title} ${this.translateSer.instant('products.added_to_cart_succefully')}`);
     this.cartSer.addToCart(product);
   }
   // wish list
   onWishList(product: ProductModel){
-    this.toast.success(`${product.title} added to wish list suddefully`);
+    this.toast.success(`${product.title} ${this.translateSer.instant('products.added_to_wish_list_succefully')}`);
     this.wishlistSer.addToWishlist(product)
   }
   onNavigateToDetails(id: number){

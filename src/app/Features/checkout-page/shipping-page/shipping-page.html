@@ -1,5 +1,5 @@
-<section class="md:mr-[160px] md:ml-[160px] p-4">
-    <h1 class="text-2xl font-bold mb-6">Select Shipping Method</h1>
+<section class="md:mr-[160px] md:ml-[160px]">
+    <h1 class="text-2xl font-bold mb-6">{{'Shipment.Select_Shipping_Method' | translate}}</h1>
     
     <form [formGroup]="shippingForm">
         @for(ship of shipmentTypes; track ship.id){
@@ -15,16 +15,20 @@
                 
                 @if(ship.id === 3 && shippingForm.value.method?.id === 3){
                     <div class="ml-7 mt-2">
-                        <label class="block text-sm font-medium mb-1">Select Date</label>
+                        <label class="block text-sm font-medium mb-1">{{'Shipment.Select_Date' | translate}}</label>
                         <input type="date" formControlName="deliveryDate" class="border border-gray-300 rounded-lg py-1 px-2">
                     </div>
                 }
             </div>
+        }@empty {
+            <div class="flex justify-center items-center">
+            <p class="text-gray-500">{{'Shipment.empty' | translate}}</p>
+        </div>
         }
 
         <div class="flex justify-end gap-4 mt-6">
-            <button (click)="navigateBack()" type="button" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">Back</button>
-            <button (click)="submit()" [disabled]="shippingForm.invalid" type="button" class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-400">Next</button>
+            <button (click)="navigateBack()" type="button" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">{{'Shipment.Back' | translate}}</button>
+            <button (click)="submit()" [disabled]="shippingForm.invalid" type="button" class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-400">{{'Shipment.Next' | translate}}</button>
         </div>
     </form>
 </section>

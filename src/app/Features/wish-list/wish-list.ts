@@ -6,10 +6,11 @@ import { CartService } from '../../Services/Cart.service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { ProductService } from '../../Services/Product.service';
 import { Subscription } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wish-list',
-  imports: [ProductCard],
+  imports: [ProductCard, TranslatePipe],
   templateUrl: './wish-list.html',
   styleUrl: './wish-list.css',
 })

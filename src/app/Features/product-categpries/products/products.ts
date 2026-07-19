@@ -7,10 +7,11 @@ import { ProductCard } from '../../../Shared/product-card/product-card';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { CartService } from '../../../Services/Cart.service';
 import { WishListService } from '../../../Services/WishList.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductCard],
+  imports: [ProductCard, TranslatePipe],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })

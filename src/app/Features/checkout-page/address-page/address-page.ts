@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { AddressModel } from '../../../Models/Address.model';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-address-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './address-page.html',
   styleUrl: './address-page.css',
 })
@@ -21,7 +22,8 @@ export class AddressPage implements OnInit{
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private transate: TranslateService
   ){}
   ngOnInit(): void {
     this.addressForm = this.fb.group({
@@ -44,9 +46,9 @@ export class AddressPage implements OnInit{
       localStorage.setItem('useraddress', JSON.stringify(this.addresses));
       this.addressForm.reset();
       this.isFormVisible = false
-      this.toast.success('Address saved successfully')
+      this.toast.success(this.transate.instant('Address.Address_saved_successfully'), {duration: 1500})
     }else{
-      this.toast.warning('Please fill all the fields')
+      this.toast.warning(this.transate.instant('Address.Please_fill_all_the_fields'), {duration: 1500})
     }
   }
   navigateBack(){
@@ -71,5 +73,6 @@ export class AddressPage implements OnInit{
     const addressToEdit = this.addresses[index];
     this.addressForm.patchValue(addressToEdit);
     this.isFormVisible = true;
+    this.toast.success(this.transate.instant('Address.Address_updated_successfully'),{duration: 1500})
   }
 }

@@ -5,11 +5,13 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ProductModel } from '../../Models/Product.model';
 import { Router } from '@angular/router';
 import { share } from 'rxjs';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, CurrencyPipe, FormsModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './shopping-cart.html',
   styleUrl: './shopping-cart.css',
 })
@@ -24,7 +26,9 @@ export class ShoppingCart implements OnInit{
   constructor(
     public cartService: CartService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toast: HotToastService,
+    private translateSer: TranslateService
 ) {}
   totalAmout: number = 0;
   FinalTotalAmout: number = this.totalAmout;

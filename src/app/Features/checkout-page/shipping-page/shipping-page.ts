@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-shipping-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './shipping-page.html',
   styleUrl: './shipping-page.css',
 })
@@ -21,7 +22,8 @@ export class ShippingPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private toast: HotToastService,
-    private router: Router
+    private router: Router,
+    private translateSer: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class ShippingPage implements OnInit {
   submit() {
     if (this.shippingForm.valid) {
       localStorage.setItem('shipment', JSON.stringify(this.shippingForm.value));
-      this.toast.success('Shipping method saved');
+      this.toast.success(this.translateSer.instant('Shipment.Shipping_method_saved'), {duration: 1500});
       this.router.navigate(['checkout/payment']);
     }
   }

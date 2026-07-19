@@ -10,10 +10,11 @@ import { NgClass } from '@angular/common';
 import { ReviewsComponent } from "../../Shared/reviews-component/reviews-component";
 import { ProductCard } from '../../Shared/product-card/product-card';
 import { WishListService } from '../../Services/WishList.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-details',
-  imports: [DetailsCard, DetailsComponent, NgClass, ReviewsComponent, ProductCard],
+  imports: [DetailsCard, DetailsComponent, NgClass, ReviewsComponent, ProductCard, TranslatePipe],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })

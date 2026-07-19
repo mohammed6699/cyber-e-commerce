@@ -1,9 +1,9 @@
-<section class="">
+<section class="md:mr-[160px] md:ml-[160px]">
     <div class="flex flex-col justify-center items-center md:items-start md:justify-between">
-        <h1 class="text-2xl font-bold mb-6 text-center md:text-start">Select Address</h1>
+        <h1 class="text-2xl font-bold mb-6 text-center md:text-start">{{'Address.Select_Address' | translate}}</h1>
     
         <button (click)="toggleForm()" class="w-[200px] bg-black text-white px-6 py-2 rounded-lg mb-6 hover:bg-gray-800 transition">
-        {{ isFormVisible ? 'Cancel' : '+ Add New Address' }}
+        {{ isFormVisible ? ('Address.Cancel' | translate) : ('Address.Add_New_Address' | translate) }}
         </button>
     </div>
     
@@ -15,7 +15,7 @@
                     <span class="bg-black text-white text-xs py-1 px-2 rounded">{{ addr.title }}</span>
                 </div>
                 <p class="font-medium text-gray-900">{{ addr.address }}</p>
-                <p class="text-sm text-gray-500">Postcode: {{addr.Postcode}}</p>
+                <p class="text-sm text-gray-500">{{'Address.Postcode' | translate}}: {{addr.Postcode}}</p>
             </div>
             
             <div class="flex items-center gap-2">
@@ -27,48 +27,52 @@
                 </button>
             </div>
         </div>
+    }@empty {
+        <div class="flex justify-center items-center">
+            <p class="text-gray-500">{{'Address.No_Saved_Addresses' | translate}}</p>
+        </div>
     }
 
     @if(isFormVisible){
         <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" class="bg-gray-50 p-6 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4 mt-6" #addNewAddress="ngForm">
             <div class="flex flex-col">
-                <label for="title" class="text-sm font-medium mb-1">Title</label>
+                <label for="title" class="text-sm font-medium mb-1">{{'Address.Title' | translate}}</label>
                 <input type="text" formControlName="title" class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none">
                 @if(addressForm.get('title')?.hasError('required') && addressForm.get('title')?.touched){
-                        <span class="text-red-500 pt-0.5">this input is required</span>
+                        <span class="text-red-500 pt-0.5">{{'Address.this_input_is_required' | translate}}</span>
                      }@else if (addressForm.get('title')?.errors?.['pattern']) {
-                        <span>Pleaser enter a valide title</span>
+                        <span>{{'Address.pleaser_enter_a_valide_title' | translate}}</span>
                      }
             </div>
             <div class="flex flex-col">
-                <label for="address" class="text-sm font-medium mb-1">Address</label>
+                <label for="address" class="text-sm font-medium mb-1">{{'Address.Address' | translate}}</label>
                 <input type="text" formControlName="address" class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none">
                 @if(addressForm.get('address')?.hasError('required') && addressForm.get('address')?.touched){
-                        <span class="text-red-500 pt-0.5">this input is required</span>
+                        <span class="text-red-500 pt-0.5">{{'Address.this_input_is_required' | translate}}</span>
                      }@else if (addressForm.get('address')?.errors?.['pattern']) {
-                        <span>Pleaser enter a valide address</span>
+                        <span>{{'Address.pleaser_enter_a_valide_address' | translate}}</span>
                      }
             </div>
             <div class="flex flex-col">
-                <label for="Postcode" class="text-sm font-medium mb-1">Post code</label>
+                <label for="Postcode" class="text-sm font-medium mb-1">{{'Address.Postcode' | translate}}</label>
                 <input type="text" formControlName="Postcode" class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none">
                 @if(addressForm.get('Postcode')?.hasError('required') && addressForm.get('Postcode')?.touched){
-                        <span class="text-red-500 pt-0.5">this input is required</span>
+                        <span class="text-red-500 pt-0.5">{{'Address.this_input_is_required' | translate}}</span>
                      }@else if (addressForm.get('Postcode')?.errors?.['pattern']) {
-                        <span>Pleaser enter a valide Postcode</span>
+                        <span>{{'Address.pleaser_enter_a_valide_postcode' | translate}}</span>
                      }
             </div>
             <div class="flex flex-col">
-                <label for="place" class="text-sm font-medium mb-1">Place</label>
+                <label for="place" class="text-sm font-medium mb-1">{{'Address.Place' | translate}}</label>
                 <select class="rounded-lg border border-gray-300 py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none" formControlName="place">
-                    <option value="Other">Other</option>
-                    <option value="Home">Home</option>
-                    <option value="Office">Office</option>
+                    <option value="Other">{{'Address.Other' | translate}}</option>
+                    <option value="Home">{{'Address.Home' | translate}}</option>
+                    <option value="Office">{{'Address.Office' | translate}}</option>
                 </select>
                 @if(addressForm.get('place')?.hasError('required') && addressForm.get('place')?.touched){
-                        <span class="text-red-500 pt-0.5">this input is required</span>
+                        <span class="text-red-500 pt-0.5">{{'Address.this_input_is_required' | translate}}</span>
                      }@else if (addressForm.get('place')?.errors?.['pattern']) {
-                        <span>Pleaser enter a valide place</span>
+                        <span>{{'Address.pleaser_enter_a_valide_place' | translate}}</span>
                      }
             </div>
             <div class="md:col-span-2 flex justify-end gap-4 mt-2">
