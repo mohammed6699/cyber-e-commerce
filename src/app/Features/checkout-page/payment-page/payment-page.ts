@@ -5,10 +5,11 @@ import { PaymentCard } from "../../../Shared/payment-card/payment-card";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-page',
-  imports: [CurrencyPipe, PaymentCard, ReactiveFormsModule, FormsModule],
+  imports: [CurrencyPipe, PaymentCard, ReactiveFormsModule, FormsModule, TranslatePipe],
   templateUrl: './payment-page.html',
   styleUrl: './payment-page.css',
 })
@@ -33,7 +34,8 @@ export class PaymentPage implements OnInit{
   
   constructor(
     private fb: FormBuilder,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private translateSer: TranslateService
   ){}
 
   ngOnInit(): void {
@@ -94,7 +96,7 @@ export class PaymentPage implements OnInit{
     };
 
     localStorage.setItem('finalOrder', JSON.stringify(finalOrder));
-    this.toast.success(`Payment processed successfully via ${this.paymentType}!`);
+    this.toast.success(`${this.translateSer.instant('payment.Payment_processed_successfully_via')} ${this.paymentType}!`, {duration: 1500});
     this.paymentForm.reset()
     console.log('Order saved:', finalOrder);
   }

@@ -1,6 +1,7 @@
-import { DOCUMENT, inject, Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject } from "rxjs";
+import { DOCUMENT } from "@angular/common";
 
 @Injectable({
     providedIn: 'root'
@@ -9,15 +10,14 @@ export class LanguageService {
     // handle the lang. state using behaviour subject
     private languageSubject = new BehaviorSubject<string>('en');
     language$ = this.languageSubject.asObservable();
+    private document = inject(DOCUMENT)
     constructor(
         private translate: TranslateService,
-        private document: Document
     ) {
         const storedLang = localStorage.getItem('language') || 'en';
         this.languageSubject.next(storedLang);
-        translate.setFallbackLang(storedLang);
-        translate.use(storedLang);
-
+        this.translate.use(storedLang);
+        this.changeDireection(storedLang);
     }
     changeLang(lang: string){
         localStorage.setItem('language', lang);

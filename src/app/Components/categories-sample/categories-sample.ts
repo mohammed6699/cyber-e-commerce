@@ -1,12 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CategoriesModel } from '../../Models/Categories.model';
+import { TranslatePipe } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-categories-sample',
-  imports: [],
+  imports: [TranslatePipe, NgClass],
   templateUrl: './categories-sample.html',
   styleUrl: './categories-sample.css',
 })
-export class CategoriesSample{
+export class CategoriesSample implements OnInit{
+  curentLanguage: any;
+  ngOnInit(): void {
+    this.curentLanguage = localStorage.getItem('language')
+  }
   @Input() categories!: CategoriesModel[];
 }

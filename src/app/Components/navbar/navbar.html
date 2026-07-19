@@ -1,9 +1,9 @@
 <div class="top-0 py-1 lg:py-2 w-full bg-transparent lg:relative z-50 dark:bg-gray-900">
     <nav class="z-10 sticky top-0 left-0 right-0 lg:mr-[160px] lg:ml-[160px] mx-auto px-5 py-2.5 lg:border-none lg:py-4">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between gap-5">
             <button [routerLink]="'/home'">
                 <div class="flex items-center space-x-2">
-                    <h2 class="text-black dark:text-white font-bold text-2xl">cyber</h2>
+                    <h2 class="text-black dark:text-white font-bold text-2xl">{{'navBar.cyber' | translate}}</h2>
                 </div>
             </button>
             
@@ -19,11 +19,12 @@
                 <div class="w-[372px]">
                     <div class="relative">
                         <input
-                            class="border-none bg-[#F5F5F5] pl-10 w-full h-[56px] max-w-[372px] text-gray-800 rounded-lg"
+                            [ngClass]="currentLang==='ar' ? 'pr-10' : 'pl-10'"
+                            class="border-none bg-[#F5F5F5]  w-full h-[56px] max-w-[372px] text-gray-800 rounded-lg"
                             type="text"
                             [(ngModel)]="searchQuery"
                             (input)="onSearch(searchQuery)"
-                            placeholder="Search..."
+                            placeholder="{{'navBar.Search' | translate}}"
                         />
                         <div class="absolute left-0 inset-y-0 flex items-center">
                             <svg class="h-6 w-6 ml-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,43 +35,57 @@
                 </div>
                 
                 <ul class="flex space-x-10 text-base font-bold text-black/60 dark:text-white">
-                    <li><a [routerLink]="'/home'">Home</a></li>
-                    <li><a [routerLink]="'/products'">Products</a></li>
-                    <li><a [routerLink]="'/categories'">Categories</a></li>
-                    <li><a [routerLink]="'/about-us'">About Us</a></li>
+                    <li><a [routerLink]="'/home'">{{'navBar.Home' | translate}}</a></li>
+                    <li><a [routerLink]="'/products'">{{'navBar.Products' | translate}}</a></li>
+                    <li><a [routerLink]="'/categories'">{{'navBar.Categories' | translate}}</a></li>
+                    <li><a [routerLink]="'/about-us'">{{'navBar.About_Us' | translate}}</a></li>
                 </ul>
 
                 <ul class="flex space-x-10">
                     <li><a [routerLink]="'/wishlist'" class="relative">
                         <img src="heart.svg" alt="wish list icon"/>
-                        <span *ngIf="wishlistSer.items().length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{wishlistSer.items().length}}</span>
+                        @if(wishlistSer.items().length > 0){
+                            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{wishlistSer.items().length}}</span>
+                        }
                     </a></li>
                     <li><a [routerLink]="'/cart'" class="relative">
                         <img src="cart.svg" alt="cart icon"/>
-                        <span *ngIf="cartSer.cartCount() > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{cartSer.cartCount()}}</span>
+                        @if (cartSer.cartCount() > 0) {
+                            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{cartSer.cartCount()}}</span>
+                        }
                     </a></li>
                     <li><button [routerLink]="'/profile-page'">
                         <img src="User.svg" alt="user profile icon"/>
                     </button></li>
                 </ul>
                 <div class="flex space-x-10">
-                    <a [routerLink]="'/login'" class="relative">
-                        login
-                    </a>
-                    
+                    <button [routerLink]="'/login'" [hidden]="token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                        {{'navBar.login' | translate}}
+                    </button>
+                    <button (click)="logout()" [hidden]="!token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                        {{'navBar.logout' | translate}}
+                    </button>
                 </div>
+                 <!-- languge toggle -->
+            <div>
+            <button (click)="changeLang(currentLang === 'en' ? 'ar' : 'en')"
+                    class="h-12 w-12 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                🌐
+            </button>
             </div>
+            </div>
+           
         </div>
 
         <!-- Mobile Menu -->
         <div [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="lg:hidden mt-4 bg-white dark:bg-gray-800 p-4 rounded-lg">
             <ul class="flex flex-col space-y-4 text-base font-bold text-black dark:text-white">
-                <li><a [routerLink]="'/home'" (click)="toggleMenu()">Home</a></li>
-                <li><a [routerLink]="'/products'" (click)="toggleMenu()">Products</a></li>
-                <li><a [routerLink]="'/categories'" (click)="toggleMenu()">Categories</a></li>
-                <li><a [routerLink]="'/about-us'" (click)="toggleMenu()">About Us</a></li>
+                <li><a [routerLink]="'/home'" (click)="toggleMenu()">{{'navBar.Home' | translate}}</a></li>
+                <li><a [routerLink]="'/products'" (click)="toggleMenu()">{{'navBar.Products' | translate}}</a></li>
+                <li><a [routerLink]="'/categories'" (click)="toggleMenu()">{{'navBar.Categories' | translate}}</a></li>
+                <li><a [routerLink]="'/about-us'" (click)="toggleMenu()">{{'navBar.About_Us' | translate}}</a></li>
             </ul>
-            <ul class="flex justify-between items-center mt-2">
+            <ul class="flex justify-between items-center mt-2" [ngClass]="currentLang==='ar' ? 'flex justify-between items-center mt-2' : ''">
                     <li><a [routerLink]="'/wishlist'" class="relative">
                         <img src="heart.svg" alt="wish list icon"/>
                         <span *ngIf="wishlistSer.items().length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">{{wishlistSer.items().length}}</span>
@@ -82,13 +97,21 @@
                     <li><button [routerLink]="'/profile-page'">
                         <img src="User.svg" alt="user profile icon"/>
                     </button></li>
-                </ul>
-                <div class="flex mt-1">
-                    <a [routerLink]="'/login'" class="flex flex-col space-y-4 text-base font-bold text-black dark:text-white">
-                        login
-                    </a>
-                    
+            </ul>
+           <div class="flex mt-2">
+                    <button [routerLink]="'/login'" [hidden]="token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                        {{'navBar.login' | translate}}
+                    </button>
+                    <button (click)="logout()" [hidden]="!token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                        {{'navBar.logout' | translate}}
+                    </button>
                 </div>
+            <div>
+            <button (click)="changeLang(currentLang === 'en' ? 'ar' : 'en')"
+                    class="h-12 w-12 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                🌐
+            </button>
+            </div>
         </div>
     </nav>
 </div>

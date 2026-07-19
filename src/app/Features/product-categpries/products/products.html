@@ -1,6 +1,6 @@
 <section class="max-w-[1200px] mx-auto px-4 md:px-0 py-10">
   <h1 class="text-3xl font-serif font-bold text-stone-900 mb-8 capitalize">
-    {{ selectedCategories[0] }} Products
+    {{ selectedCategories[0] }} {{'products.Products' | translate}}
   </h1>
 
   @if (filteredProductList.length > 0) {
@@ -14,6 +14,6 @@
       }
     </div>
   } @else {
-    <p class="text-stone-500 text-center py-10">No products found in this category.</p>
+    <p class="text-stone-500 text-center py-10">{{'products.empty' | translate}}</p>
   }
 </section>

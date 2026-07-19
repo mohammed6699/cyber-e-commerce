@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -17,6 +17,7 @@ export class Login implements OnInit{
      private route: Router,
       private toast: HotToastService,
       private fb: FormBuilder,
+      private translateSer: TranslateService
   ){}
   ngOnInit(): void {
     this.buildLoginForm()
@@ -35,7 +36,7 @@ export class Login implements OnInit{
     let token = 'aaaaaaaaaaaaaaaannnnnnnnnrrrrrrrr8888#########'
     localStorage.setItem('access-token', token);
     localStorage.setItem('user', JSON.stringify(this.loginForm.value));
-    this.toast.success('logged in successfully');
+    this.toast.success(this.translateSer.instant('login.logged_in_successfully'));
     this.route.navigate(['/home']);
   }
 

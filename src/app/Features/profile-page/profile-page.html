@@ -1,31 +1,31 @@
 <section class="p-6 max-w-6xl mx-auto">
     @if(userData){
         <div class="mb-8 text-center bg-gray-100 p-6 rounded-lg shadow-sm">
-            <h1 class="text-3xl font-bold text-gray-800">Welcome back, {{userData.userName}}</h1>
+            <h1 class="text-3xl font-bold text-gray-800">{{'profile.Welcome_back' | translate}}, {{userData.userName}}</h1>
         </div>
     }
     
     @if(orderData){
         <div class="orders-section bg-white p-6 rounded-lg shadow-md border border-gray-200">
-            <h2 class="text-2xl font-semibold mb-6 text-gray-700 border-b pb-2">Your Last Order</h2>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-700 border-b pb-2">{{'profile.Your_Last_Order' | translate}}</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div class="order-info space-y-2">
-                    <h3 class="text-lg font-medium text-gray-600">Shipping Information</h3>
-                    <p class="text-gray-700"><strong>Address:</strong> {{orderData.address.address}}, {{orderData.address.place}}</p>
-                    <p class="text-gray-700"><strong>Postcode:</strong> {{orderData.address.Postcode}}</p>
-                    <p class="text-gray-700"><strong>Shipping Type:</strong> {{orderData.shipment.type}}</p>
+                    <h3 class="text-lg font-medium text-gray-600">{{'profile.Shipping_Information' | translate}}</h3>
+                    <p class="text-gray-700"><strong>{{'profile.Address' | translate}}:</strong> {{orderData.address.address}}, {{orderData.address.place}}</p>
+                    <p class="text-gray-700"><strong>{{'profile.Postcode' | translate}}:</strong> {{orderData.address.Postcode}}</p>
+                    <p class="text-gray-700"><strong>{{'profile.Shipping_Type' | translate}}:</strong> {{orderData.shipment.type}}</p>
                 </div>
                 
                 <div class="payment-info space-y-2">
-                    <h3 class="text-lg font-medium text-gray-600">Payment Details</h3>
-                    <p class="text-gray-700"><strong>Method:</strong> {{orderData.paymentMethod}}</p>
-                    <p class="text-gray-700"><strong>Total Amount:</strong> ${{orderData.paymentDetails.totalAmout}}</p>
-                    <p class="text-gray-700"><strong>Shipping Cost:</strong> ${{orderData.paymentDetails.shippigValue}}</p>
+                    <h3 class="text-lg font-medium text-gray-600">{{'profile.Payment_Details' | translate}}</h3>
+                    <p class="text-gray-700"><strong>{{'profile.Method' | translate}}:</strong> {{orderData.paymentMethod}}</p>
+                    <p class="text-gray-700"><strong>{{'profile.Total_Amount' | translate}}:</strong> ${{orderData.paymentDetails.totalAmout}}</p>
+                    <p class="text-gray-700"><strong>{{'profile.Shipping_Cost' | translate}}:</strong> ${{orderData.paymentDetails.shippigValue}}</p>
                 </div>
             </div>
 
-            <h3 class="text-lg font-medium text-gray-600 mb-4">Products</h3>
+            <h3 class="text-lg font-medium text-gray-600 mb-4">{{"profile.Products" | translate}}</h3>
             <div class="flex flex-wrap gap-4 ">
                 @for(product of orderData.items; track product.id){
                     <div class="w-full md:w-[300px] border p-4 rounded-lg flex items-center gap-4">
@@ -39,6 +39,6 @@
             </div>
         </div>
     } @else {
-        <p class="text-center text-gray-500 py-10">No recent orders found.</p>
+        <p class="text-center text-gray-500 py-10">{{'profile.No_recent_orders_found' | translate}}</p>
     }
 </section>

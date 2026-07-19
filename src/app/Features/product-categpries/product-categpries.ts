@@ -1,13 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ProductListModel } from '../../Models/Product.model';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesModel } from '../../Models/Categories.model';
-import { ProductService } from '../../Services/Product.service';
-import { HotToastService } from '@ngxpert/hot-toast';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-categpries',
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe],
   templateUrl: './product-categpries.html',
   styleUrl: './product-categpries.css',
 })

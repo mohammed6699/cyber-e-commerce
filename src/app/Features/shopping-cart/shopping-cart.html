@@ -1,12 +1,12 @@
 <div class="container mx-auto px-4 py-8">
-  <h2 class="text-3xl font-bold mb-8">Shopping Cart</h2>
+  <h2 class="text-3xl font-bold mb-8">{{'Cart.Shopping_Cart' | translate}}</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     <!-- left: Cart Items -->
     <div class="md:col-span-2">
       @if (cartService.items().length === 0) {
         <div class="text-center py-10">
-          <p class="text-gray-500">Your cart is empty.</p>
+          <p class="text-gray-500">{{'Cart.Your_cart_is_empty' | translate}}.</p>
         </div>
       } @else {
         @for (item of cartService.items(); track item.id){
@@ -93,52 +93,58 @@
     <div class="md:col-span-1 md:h-[656px]">
       <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <form class="" [formGroup]="orderForm">
-            <h3 class="text-xl font-semibold mb-4">Order Summary</h3>
+            <h3 class="text-xl font-semibold mb-4">{{'Cart.Order_Summary' | translate}}</h3>
           <div class="flex flex-col pt-[40px] mb-[24px] gap-[8px]">
-              <label class="text-[#7f7f7f] text-lg">Discount code / Promo code</label>
+              <label class="text-[#7f7f7f] text-lg">{{'Cart.Discount_code' | translate}}</label>
               <input 
                 type="text" 
                 formControlName="promoCode"
-                class="w-full h-[56px] bg-white text-gray-900 border-2 border border-[#9F9F9F] rounded-[7px] p-[20px]" placeholder="Enter promo code"/>
+                class="w-full h-[56px] bg-white text-gray-900 border-2 border border-[#9F9F9F] rounded-[7px] p-[20px]" placeholder="{{'Cart.Enter_promo_code' | translate}}"/>
           </div>
+          @if(orderForm.get('promoCode')?.hasError('required') && orderForm.get('promoCode')?.touched){
+                        <span class="text-red-500 pt-0.5">{{'Cart.this_input_is_required' | translate}}</span>
+                     }
             <div class="flex flex-col gap-[8px]">
-                <label class="text-[#7f7f7f] text-lg">Your bonus card number</label>
+                <label class="text-[#7f7f7f] text-lg">{{'Cart.Your_bonus_card_number' | translate}}</label>
                 <div class="relative flex items-center">
                   <input 
                     type="text" 
                     formControlName="bonusCard"
-                    class="w-full h-[56px] border border-[#9F9F9F] rounded-[7px] px-4 bg-white pr-20" placeholder="Enter card number"/>
+                    class="w-full h-[56px] border border-[#9F9F9F] rounded-[7px] px-4 bg-white pr-20" placeholder="{{'Cart.Enter_card_number' | translate}}"/>
                 <button class="absolute right-2 rounded-md bg-white text-black border-2 border-black px-3 py-1 text-sm font-semibold hover:bg-black hover:text-white transition">apply</button>
                 </div>
+                @if(orderForm.get('bonusCard')?.hasError('required') && orderForm.get('bonusCard')?.touched){
+                        <span class="text-red-500 pt-0.5">{{'Cart.this_input' | translate}}</span>
+                     }
             </div>
           </form>
           <!-- subtotal -->
         <div class="flex justify-between mb-2 mt-5">
-          <span class="text-black font-semibold text-[16px] leading-[24px]">SubTotal</span>
+          <span class="text-black font-semibold text-[16px] leading-[24px]">{{'Cart.SubTotal' | translate}}</span>
           <span class="font-medium text-[16px] leading-[24px]">{{ cartService.cartTotalAmount() | currency }}</span>
         </div>
         <!-- taxes -->
          <div class="flex justify-between mb-2 mt-5">
-          <span class="text-[#545454] font-normal text-[16px] leading-[32px]">Estimated Tax</span>
+          <span class="text-[#545454] font-normal text-[16px] leading-[32px]">{{'Cart.Estimated_Tax' | translate}}</span>
           <span class="text-black font-normal text-[16px] leading-[32px]">{{tax | currency}}</span>
         </div>
         <!-- estimated shopping && handling -->
          <div class="flex justify-between mb-2 mt-5">
-          <span class="text-[#545454] font-normal text-[16px] leading-[32px]">Estimated Shopping & Handling</span>
+          <span class="text-[#545454] font-normal text-[16px] leading-[32px]">{{'Cart.Estimated_Shopping_&_Handling' | translate}}</span>
           <span class="text-black font-normal text-[16px] leading-[32px]">{{shippigValue | currency}}</span>
         </div>
         <div class="flex justify-between text-xl font-bold mt-4 pt-4">
-          <span>discount applied:</span>
+          <span>{{'Cart.discount_applied' | translate}}:</span>
           <span>{{ discount | currency }}</span>
         </div>
         <div class="flex justify-between text-xl font-bold mt-4 pt-4">
-          <span>Total:</span>
+          <span>{{'Cart.Total' | translate}}:</span>
           <span>{{ FinalTotalAmout | currency }}</span>
         </div>
         <button 
         (click)="navigateToCheckout()"
         class="w-full mt-6 bg-black text-white py-3 rounded-md hover:bg-gray-800 transition">
-          Checkout
+          {{'Cart.Checkout' | translate}}
         </button>
       </div>
     </div>

@@ -3,10 +3,12 @@ import { Routes } from "@angular/router";
 export const CHECKOUT_ROUTES: Routes = [
     {
         path: '',
+        loadComponent: () => import('./checkout-page').then(x => x.CheckoutPage),
         children: [
             {
                 path: '',
-                loadComponent: () => import('./checkout-page').then(x => x.CheckoutPage)
+                redirectTo: 'address',
+                pathMatch: 'full'
             },
             {
                 path: 'address',
