@@ -38,6 +38,7 @@ export class ProductPage implements OnInit, OnDestroy {
   get totalPages(): number {
     return Math.ceil(this.total / this.pageSize) || 1;
   }
+  currentLang: any
   constructor(
     private productSer: ProductService,
     private toast: HotToastService,
@@ -71,6 +72,7 @@ export class ProductPage implements OnInit, OnDestroy {
       });
     });
     this.loadGategoryList();
+    this.currentLang = localStorage.getItem('language')
   }
   ngOnDestroy(): void {
     if (this.searchSub) {
@@ -118,7 +120,10 @@ export class ProductPage implements OnInit, OnDestroy {
       },
       error: (err) => {
         // console.log("Error message", err);
-        this.toast.error(this.translateSer.instant("products.Error_loading_products"))
+        this.toast.error(this.translateSer.instant("products.Error_loading_products"), {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    })
       }
     })
   }
@@ -149,7 +154,10 @@ export class ProductPage implements OnInit, OnDestroy {
       },
       error: (err) => {
         // console.log("error loading catgories", err)
-        this.toast.error(this.translateSer.instant("products.Error_Loading_categories"))
+        this.toast.error(this.translateSer.instant("products.Error_Loading_categories"), {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    })
       }
     })
   }
@@ -186,12 +194,18 @@ export class ProductPage implements OnInit, OnDestroy {
   }
   // add to cart
   onAddToCart(product: ProductModel){
-    this.toast.success(`${product.title} ${this.translateSer.instant('products.added_to_cart_succefully')}`);
+    this.toast.success(`${product.title} ${this.translateSer.instant('products.added_to_cart_succefully')}`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-left' : 'top-right'
+    });
     this.cartSer.addToCart(product);
   }
   // wish list
   onWishList(product: ProductModel){
-    this.toast.success(`${product.title} ${this.translateSer.instant('products.added_to_wish_list_succefully')}`);
+    this.toast.success(`${product.title} ${this.translateSer.instant('products.added_to_wish_list_succefully')}`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-left' : 'top-right'
+    });
     this.wishlistSer.addToWishlist(product)
   }
   onNavigateToDetails(id: number){

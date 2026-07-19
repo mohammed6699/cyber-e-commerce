@@ -8,6 +8,10 @@
                 [showDetailsBtn]="false"
                 (addToCart)="addTocart($event)"
             />
+        }@empty {
+            <div appEmptysection>
+                <h1>{{'announcement.Products_unavailable' | translate}}</h1>
+            </div>
         }
     </div>
 </section>

@@ -34,6 +34,10 @@
                   {{ cat.name }} {{productNum}}
                 </label>
               </li>
+            }@empty {
+              <div appEmptysection>
+                <h1>{{'empty.no_categories' | translate}}</h1>
+              </div>
             }
           </ul>
         </details>
@@ -48,7 +52,7 @@
             <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
               <h2 class="text-2xl font-bold mb-4">{{'products.Range_Slider' | translate}}</h2>
               <div class="mb-4">
-                <label for="price-range" class="block text-gray-700 font-bold mb-2">{{'products.Price_Range_(Up to)'}} {{ maxPrice | currency }}</label>
+                <label for="price-range" class="block text-gray-700 font-bold mb-2">{{'products.Price_Range_(Up to)'}} {{ maxPrice | currency: 'EGP' }}</label>
                 <input type="range" id="price-range" class="w-full accent-indigo-600" min="0" max="3000" [value]="minPrice" (input)="updatePrice($event)">
               </div>
               <div class="flex justify-between text-gray-500">
@@ -125,6 +129,10 @@
         [showDetailsBtn]="false"
         ></app-product-card>
     </a>
+        }@empty {
+          <div appEmptysection>
+            <h1>{{'empty.no_products' | translate}}</h1>
+          </div>
         }
   </div>
   <div class="flex items-center justify-center space-x-4 mt-8 mb-4">

@@ -8,8 +8,8 @@
             (addToCart)="addTocart($event)"
             ></app-product-card>
         }@empty {
-        <div class="flex w-full justify-center py-10">
-          <p class="text-gray-500">{{'Cart.wish_list_is_empty' | translate}}.</p>
+        <div appEmptysection>
+          <p>{{'Cart.wish_list_is_empty' | translate}}.</p>
         </div>
         }
     </div>

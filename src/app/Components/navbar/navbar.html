@@ -59,10 +59,10 @@
                     </button></li>
                 </ul>
                 <div class="flex space-x-10">
-                    <button [routerLink]="'/login'" [hidden]="token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                    <button [routerLink]="'/login'" [hidden]="token" appButton>
                         {{'navBar.login' | translate}}
                     </button>
-                    <button (click)="logout()" [hidden]="!token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                    <button (click)="logout()" [hidden]="!token" appButton>
                         {{'navBar.logout' | translate}}
                     </button>
                 </div>
@@ -99,10 +99,10 @@
                     </button></li>
             </ul>
            <div class="flex mt-2">
-                    <button [routerLink]="'/login'" [hidden]="token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                    <button [routerLink]="'/login'" [hidden]="token" appButton>
                         {{'navBar.login' | translate}}
                     </button>
-                    <button (click)="logout()" [hidden]="!token" class="bg-[#003333] text-white py-2 px-4 rounded-lg">
+                    <button (click)="logout()" [hidden]="!token" appButton>
                         {{'navBar.logout' | translate}}
                     </button>
                 </div>

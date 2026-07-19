@@ -7,7 +7,7 @@ import { ProductCard } from '../../../Shared/product-card/product-card';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { CartService } from '../../../Services/Cart.service';
 import { WishListService } from '../../../Services/WishList.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
@@ -18,13 +18,15 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class Products implements OnInit{
   selectedCategories: string[] = []
   filteredProductList: ProductModel[] = [];
+  currentLang: any
   constructor(
     private route: ActivatedRoute,
     private productSer : ProductService,
     private toast: HotToastService,
     private cartSer: CartService,
     private wishlistSer: WishListService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ){}
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class Products implements OnInit{
       }
       this.productListMethod();
     })
+    this.currentLang = localStorage.getItem('language')
   }
   productListMethod(){
     this.productSer.searchProductList('', 0, 0).subscribe({
@@ -51,11 +54,17 @@ export class Products implements OnInit{
     })
   }
   onAddToCart(product: ProductModel){
-    this.toast.success(`${product.title} added to cart suddefully`);
+    this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_cart_suddefully')}`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     this.cartSer.addToCart(product);
   }
   onWishListClick(product: ProductModel): void{
-    this.toast.success(`${product.title} added to wishList suddefully`);
+    this.toast.success(`${product.title} added to wishList suddefully`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     this.wishlistSer.toogleWishList(product)
     
   }

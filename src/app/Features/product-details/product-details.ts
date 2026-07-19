@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
 import { ReviewsComponent } from "../../Shared/reviews-component/reviews-component";
 import { ProductCard } from '../../Shared/product-card/product-card';
 import { WishListService } from '../../Services/WishList.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-details',
@@ -22,14 +22,15 @@ export class ProductDetails implements OnInit {
   productId!: number;
   product!: ProductModel;
   relatedProducts: ProductModel[] = [];
-
+  currentLang: any
   constructor(
     private productSer: ProductService,
     private route: ActivatedRoute,
     private toast: HotToastService,
     private cartSer: CartService,
     private cdr: ChangeDetectorRef,
-    private wishlistSer: WishListService
+    private wishlistSer: WishListService,
+    private translate: TranslateService
   ) { }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -38,17 +39,24 @@ export class ProductDetails implements OnInit {
         this.loadProductDetails()
       }
     })
+    this.currentLang = localStorage.getItem('language')
   }
   loadProductDetails() {
     this.productSer.getProductDetails(this.productId).subscribe({
       next: (res) => {
         this.product = res;
         this.loadRelatedProducts(res.category);
-        this.toast.success('Product Details loaded');
+        this.toast.success(`${this.translate.instant('toasts.Product_Details_loaded')}`, {
+            duration: 1500,
+            position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+        });
         this.cdr.detectChanges()
       },
       error: (err) => {
-        this.toast.error('Error loading product details')
+        this.toast.error(`${this.translate.instant('toasts.Error_loading_product_details')}`, {
+            duration: 1500,
+            position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+        });
         console.log(err);
       }
     })
@@ -74,11 +82,17 @@ export class ProductDetails implements OnInit {
     }
   }
   cart(product: ProductModel){
-    this.toast.success(`${product.title} added to cart`);
+    this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_cart')}`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     this.cartSer.addToCart(product);
   }
   AddToWishlist(product: ProductModel) {
-    this.toast.success(`${product.title} added to your wish list`)
+    this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_your_wish_list')}`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    })
     this.wishlistSer.addToWishlist(product)
   }
 }

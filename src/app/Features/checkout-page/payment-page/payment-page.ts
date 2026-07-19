@@ -6,10 +6,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { FormsModule } from '@angular/forms';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Emptysection } from "../../../directives/emptysection";
 
 @Component({
   selector: 'app-payment-page',
-  imports: [CurrencyPipe, PaymentCard, ReactiveFormsModule, FormsModule, TranslatePipe],
+  imports: [CurrencyPipe, PaymentCard, ReactiveFormsModule, FormsModule, TranslatePipe, Emptysection],
   templateUrl: './payment-page.html',
   styleUrl: './payment-page.css',
 })
@@ -31,7 +32,7 @@ export class PaymentPage implements OnInit{
   paymentForm!: FormGroup;
   paymentType: string = 'card';
   isFlipped = false;
-  
+  currentLang: any
   constructor(
     private fb: FormBuilder,
     private toast: HotToastService,
@@ -50,6 +51,7 @@ export class PaymentPage implements OnInit{
     this.getShipmentItemsFromLocalStorage()
     this.getAddressItemsFromLocalStorage()
     this.getCartDetails()
+    this.currentLang = localStorage.getItem('language')
   }
   // right side data details from l.s
   getCardDetailsFromLocalStorage(){
@@ -96,7 +98,10 @@ export class PaymentPage implements OnInit{
     };
 
     localStorage.setItem('finalOrder', JSON.stringify(finalOrder));
-    this.toast.success(`${this.translateSer.instant('payment.Payment_processed_successfully_via')} ${this.paymentType}!`, {duration: 1500});
+    this.toast.success(`${this.translateSer.instant('payment.Payment_processed_successfully_via')} ${this.paymentType}!`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     this.paymentForm.reset()
     console.log('Order saved:', finalOrder);
   }

@@ -13,7 +13,14 @@ export class CartService{
     // add to cart
     addToCart(product: ProductModel): void {
         console.log('product added to cart');
-        this.cartItems.update((items) => [...items, product]);
+        // solve the qty bug
+        this.cartItems.update((items) => {
+            const existingItem = items.find(i => i.id === product.id);
+            if(existingItem){
+                return items.map(i => i.id === product.id ? {...i, quantity: (i.quantity || 1) + 1} : i);
+            }
+            return [...items, {...product, quantity: 1}];
+        });
         localStorage.setItem('cart', JSON.stringify(this.cartItems()));
     }
     // delete product from cart
@@ -34,12 +41,11 @@ export class CartService{
     }
     // get cart items
     getCartItems(): ProductModel[] {
-        this.cartItems.set(JSON.parse(localStorage.getItem('cart') || '[]'));
-        return this.cartItems();
+        return this.items()
     }
     // get cart count
     getCartCount(): number {
-        return this.cartItems().length;
+        return this.cartCount();
     }
     // get cart total amount
     getCartTotalAmount(): number {

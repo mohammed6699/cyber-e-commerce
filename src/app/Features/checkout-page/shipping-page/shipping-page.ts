@@ -12,7 +12,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 })
 export class ShippingPage implements OnInit {
   shippingForm!: FormGroup;
-
+  currentLang: any
   shipmentTypes = [
     { id: 1, price: 'Free', type: 'Regulary shipment', data: '17/07/2026 - 20/07/2026' },
     { id: 2, price: '8.5', type: 'Express', data: '18/07/2026 - 19/07/2026' },
@@ -41,6 +41,7 @@ export class ShippingPage implements OnInit {
       }
       dateControl?.updateValueAndValidity()
     });
+    this.currentLang = localStorage.getItem('language')
   }
 
   selectShipment(shipment: any) {
@@ -50,7 +51,10 @@ export class ShippingPage implements OnInit {
   submit() {
     if (this.shippingForm.valid) {
       localStorage.setItem('shipment', JSON.stringify(this.shippingForm.value));
-      this.toast.success(this.translateSer.instant('Shipment.Shipping_method_saved'), {duration: 1500});
+      this.toast.success(this.translateSer.instant('Shipment.Shipping_method_saved'), {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
       this.router.navigate(['checkout/payment']);
     }
   }

@@ -14,8 +14,8 @@
                 </div>
             </div>
         }@empty {
-            <div class="flex justify-center items-center">
-            <p class="text-gray-500">{{"payment.No_items" | translate}}</p>
+            <div appEmptysection>
+            <p>{{"payment.No_items" | translate}}</p>
         </div>
         }
         <!-- address -->
@@ -33,23 +33,23 @@
                 <h1 class="title">{{'payment.payment_Details' | translate}}</h1>
                 <div class="flex justify-between">
                     <span>{{'payment.Total_amout' | translate}} :</span>
-                    <span>{{cartDetails?.totalAmout | currency}}</span>
+                    <span>{{cartDetails?.totalAmout | currency:'EGP'}}</span>
                 </div>
                 <div class="flex justify-between">
                     <span>{{'payment.Discount' | translate}} :</span>
-                    <span>{{cartDetails?.discount | currency}}</span>
+                    <span>{{cartDetails?.discount | currency: 'EGP'}}</span>
                 </div>
                 <div class="flex justify-between">
                     <span>{{'payment.Tax' | translate}} :</span>
-                    <span>{{cartDetails?.tax | currency}}</span>
+                    <span>{{cartDetails?.tax | currency: 'EGP'}}</span>
                 </div>
                 <div class="flex justify-between">
                     <span>{{'payment.Shipping' | translate}} :</span>
-                    <span>{{cartDetails?.shippigValue | currency}}</span>
+                    <span>{{cartDetails?.shippigValue | currency: 'EGP'}}</span>
                 </div>
                 <div class="flex justify-between">
                     <span>{{'payment.Final_total' | translate}} :</span>
-                    <span>{{cartDetails?.FinalTotalAmout?.toFixed(2) | currency}}</span>
+                    <span>{{cartDetails?.FinalTotalAmout?.toFixed(2) | currency: 'EGP'}}</span>
                 </div>
             </div>
         </div>

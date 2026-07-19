@@ -1,4 +1,4 @@
-<section class="md:mr-[160px] md:ml-[160px]">
+<section class="page">
     <div class="flex flex-col justify-center items-center md:items-start md:justify-between">
         <h1 class="text-2xl font-bold mb-6 text-center md:text-start">{{'Address.Select_Address' | translate}}</h1>
     
@@ -28,8 +28,8 @@
             </div>
         </div>
     }@empty {
-        <div class="flex justify-center items-center">
-            <p class="text-gray-500">{{'Address.No_Saved_Addresses' | translate}}</p>
+        <div appEmptysection>
+            <p>{{'Address.No_Saved_Addresses' | translate}}.</p>
         </div>
     }
 

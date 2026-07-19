@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductModel } from '../../Models/Product.model';
 import { NgClass } from '@angular/common';
+import { PopularBtn } from "../../directives/popular-btn";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-popular-proucts-card',
-  imports: [NgClass],
+  imports: [NgClass, PopularBtn, RouterLink],
   templateUrl: './popular-proucts-card.html',
   styleUrl: './popular-proucts-card.css',
 })

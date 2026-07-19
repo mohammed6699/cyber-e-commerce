@@ -13,6 +13,10 @@
             (addToCart)="onAddToCart($event)"
             />
         </swiper-slide>
+    }@empty {
+        <div appEmptysection>
+            <h1>{{'empty.no_products' | translate}}</h1>
+        </div>
     }
     </swiper-container>
 
@@ -24,6 +28,10 @@
             [isLast]="i === 3"
             (addToCart)="onAddToCart($event)"
             />
+        </div>
+    }@empty {
+        <div appEmptysection>
+            <h1>{{'empty.no_products' | translate}}</h1>
         </div>
     }
 </section>

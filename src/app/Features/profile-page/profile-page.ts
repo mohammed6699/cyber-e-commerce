@@ -13,6 +13,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 export class ProfilePage implements OnInit{
   userData!: UserModel;
   orderData!: FinalOrderModel;
+  currentLang: any
   constructor(
     private toast: HotToastService,
     private translateSer: TranslateService
@@ -20,12 +21,16 @@ export class ProfilePage implements OnInit{
   ngOnInit(): void {
     this.getOrderData();
     this.getUserData();
+    this.currentLang = localStorage.getItem('language')
   }
   getUserData(){
     const userString = localStorage.getItem("user");
     if (userString) {
       this.userData = JSON.parse(userString);
-      this.toast.success(`${this.translateSer.instant('profile.Welcome_back')} ${this.userData.userName}`);
+      this.toast.success(`${this.translateSer.instant('profile.Welcome_back')} ${this.userData.userName}`, {
+        duration: 1500,
+        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    });
     }
     console.log(this.userData);
     
