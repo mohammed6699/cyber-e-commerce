@@ -1,5 +1,5 @@
-<app-hero [products]="products.products" />
-<app-sample-product [products]="products.products" />
+<app-hero [products]="products.products" [isLoading]="!products" />
+<app-sample-product [products]="products.products" [isLoading]="!products" />
 <app-categories-sample [categories]="categories" />
 <app-products-sample [categories]="categories" [allProducts]="products.products" />
 <app-popular-products [products]="products.products" />

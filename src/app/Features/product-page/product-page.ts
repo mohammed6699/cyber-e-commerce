@@ -10,14 +10,16 @@ import { ProductCard } from '../../Shared/product-card/product-card';
 import { CartService } from '../../Services/Cart.service';
 import { WishListService } from '../../Services/WishList.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ProductCardSkeleton } from '../../Shared/skeleton/product-card-skeleton/product-card-skeleton';
 
 @Component({
   selector: 'app-product-page',
-  imports: [CurrencyPipe, NgStyle, ProductCard, RouterLink, TranslatePipe],
+  imports: [CurrencyPipe, NgStyle, ProductCard, RouterLink, TranslatePipe, ProductCardSkeleton],
   templateUrl: './product-page.html',
   styleUrl: './product-page.css',
 })
 export class ProductPage implements OnInit, OnDestroy {
+  isLoading: boolean = true;
   searchText: string = '';
   pageSize: number = 12;
   total: number = 0;
@@ -80,6 +82,7 @@ export class ProductPage implements OnInit, OnDestroy {
     }
   }
   productListMethod() {
+    this.isLoading = true;
     this.productSer.searchProductList(this.searchText, 0, 0).subscribe({
       next: (res: SearchProducts) => {
         let filteredProducts = res.products;        
@@ -116,9 +119,11 @@ export class ProductPage implements OnInit, OnDestroy {
         const end = start + this.pageSize;
         this.productList = filteredProducts.slice(start, end);
 
+        this.isLoading = false;
         this.cdr.detectChanges();
       },
       error: (err) => {
+        this.isLoading = false;
         // console.log("Error message", err);
         this.toast.error(this.translateSer.instant("products.Error_loading_products"), {
         duration: 1500,

@@ -10,4 +10,5 @@ import { ProductModel } from '../../Models/Product.model';
 })
 export class SampleProduct {
   @Input() products: ProductModel[] = [];
+  @Input() isLoading: boolean = false;
 }

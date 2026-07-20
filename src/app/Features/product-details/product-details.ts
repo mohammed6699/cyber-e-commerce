@@ -11,14 +11,19 @@ import { ReviewsComponent } from "../../Shared/reviews-component/reviews-compone
 import { ProductCard } from '../../Shared/product-card/product-card';
 import { WishListService } from '../../Services/WishList.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ProductCardSkeleton } from '../../Shared/skeleton/product-card-skeleton/product-card-skeleton';
+import { DetailsCardSkeleton } from "../../Shared/skeleton/details-card/details-card-skeleton";
+import { DetailsSkeleton } from "../../Shared/skeleton/details-card/details.skeleton";
+import { ReviewSkeleton } from "../../Shared/skeleton/details-card/review-skeleton";
 
 @Component({
   selector: 'app-product-details',
-  imports: [DetailsCard, DetailsComponent, NgClass, ReviewsComponent, ProductCard, TranslatePipe],
+  imports: [DetailsCard, DetailsComponent, NgClass, ReviewsComponent, ProductCard, TranslatePipe, ProductCardSkeleton, DetailsCardSkeleton, DetailsSkeleton, ReviewSkeleton],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
 export class ProductDetails implements OnInit {
+  isRelatedLoading: boolean = true;
   productId!: number;
   product!: ProductModel;
   relatedProducts: ProductModel[] = [];
@@ -62,8 +67,10 @@ export class ProductDetails implements OnInit {
     })
   }
   loadRelatedProducts(category: string) {
+    this.isRelatedLoading = true;
     this.productSer.getProductList().subscribe(res => {
       this.relatedProducts = res.products.filter(p => p.category === category && p.id !== this.productId);
+      this.isRelatedLoading = false;
       this.cdr.detectChanges()
     });
   }
