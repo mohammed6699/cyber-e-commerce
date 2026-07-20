@@ -4,6 +4,7 @@ import { MainLayout } from './Layouts/main-layout/main-layout';
 import { authGuard } from './Guards/auth-guard';
 import { productResolver } from './Resolvers/product.resolver';
 import { categoryResolver } from './Resolvers/categoryresolver';
+import { NotFound } from './Components/notFound/not-found/not-found';
 
 export const routes: Routes = [
     {
@@ -62,5 +63,6 @@ export const routes: Routes = [
                 loadComponent: () => import('./Features/profile-page/profile-page').then(x => x.ProfilePage)
             }
         ]
-    }
+    },
+    {path: '**', component: NotFound}
 ];

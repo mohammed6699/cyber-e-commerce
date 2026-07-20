@@ -1,0 +1,27 @@
+<div class="not-found-wrapper">
+  <div class="bg-shapes">
+    <span class="shape shape1"></span>
+    <span class="shape shape2"></span>
+    <span class="shape shape3"></span>
+  </div>
+
+  <div class="not-found-card">
+    <div class="error-code">404</div>
+
+    <h1>{{'notFound.Page_not_found' | translate}}</h1>
+
+    <p class="message">
+      {{'notFound.desc' | translate}}
+    </p>
+
+    <div class="button-group">
+      <button class="btn btn-primary" (click)="navigateToHome()">
+        <i class="fas fa-home me-2"></i> {{'notFound.Go_to_Home' | translate}}
+      </button>
+
+      <button class="btn btn-outline" (click)="navigateBack()">
+        <i class="fas fa-arrow-left me-2"></i> {{'notFound.Go_Back' | translate}}
+      </button>
+    </div>
+  </div>
+</div>

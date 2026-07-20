@@ -225,5 +225,11 @@
         "Add_to_Wishlist": "Add to Wishlist",
         "Category": "Category",
         "Tag": "Tag"
+    },
+    "notFound": {
+        "Page_not_found": "Page not found",
+        "desc": "The page you are looking for doesn’t exist or has been moved. Don’t worry, we’ll help you get back on track.",
+        "Go_to_Home": "Go to Home",
+        "Go_Back": "Go Back"
     }
 }
