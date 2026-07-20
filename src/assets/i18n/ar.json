@@ -194,5 +194,12 @@
         "no_categories": "لا توجد فئات",
         "no_tags": "لا توجد وسوم",
         "no_reviews": "لا توجد مراجعات"
+    },
+    "toasts": {
+        "added_to_cart_succefully": "تمت إضافة المنتج إلى سلة التسوق بنجاح.",
+        "Product_Details_loaded": "تم تحميل تفاصيل المنتج",
+        "Error_loading_product_details": "حدث خطأ أثناء تحميل تفاصيل المنتج",
+        "added_to_cart": "تمت الإضافة إلى سلة التسوق",
+        "added_to_your_wish_list": "تمت الإضافة إلى قائمة الأمنيات"
     }
 }

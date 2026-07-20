@@ -9,9 +9,11 @@ import { CartService } from '../../../Services/Cart.service';
 import { WishListService } from '../../../Services/WishList.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
+import { ProductCardSkeleton } from '../../../Shared/skeleton/product-card-skeleton/product-card-skeleton';
+
 @Component({
   selector: 'app-products',
-  imports: [ProductCard, TranslatePipe],
+  imports: [ProductCard, TranslatePipe, ProductCardSkeleton],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
@@ -19,6 +21,7 @@ export class Products implements OnInit{
   selectedCategories: string[] = []
   filteredProductList: ProductModel[] = [];
   currentLang: any
+  isLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private productSer : ProductService,
@@ -40,6 +43,7 @@ export class Products implements OnInit{
     this.currentLang = localStorage.getItem('language')
   }
   productListMethod(){
+    this.isLoading = true;
     this.productSer.searchProductList('', 0, 0).subscribe({
       next: (res: SearchProducts) => {
         let filteredProducts = res.products;
@@ -49,7 +53,10 @@ export class Products implements OnInit{
         }
         this.cdr.markForCheck()
         this.filteredProductList = filteredProducts;
-        
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
       }
     })
   }
