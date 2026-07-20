@@ -3,10 +3,11 @@ import { ProductModel } from '../../Models/Product.model';
 import { NgClass } from '@angular/common';
 import { PopularBtn } from "../../directives/popular-btn";
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popular-proucts-card',
-  imports: [NgClass, PopularBtn, RouterLink],
+  imports: [NgClass, PopularBtn, RouterLink, TranslatePipe],
   templateUrl: './popular-proucts-card.html',
   styleUrl: './popular-proucts-card.css',
 })

@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-card',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './payment-card.html',
   styleUrl: './payment-card.css',
 })

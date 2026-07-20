@@ -4,11 +4,10 @@ import { ProductCard } from "../../Shared/product-card/product-card";
 import { CartService } from '../../Services/Cart.service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-discount-products',
-  imports: [ProductCard, TranslatePipe,NgClass],
+  imports: [ProductCard, TranslatePipe],
   templateUrl: './discount-products.html',
   styleUrl: './discount-products.css',
 })

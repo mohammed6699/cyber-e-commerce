@@ -1,14 +1,15 @@
 import { Component, computed, EventEmitter, Input, Output } from '@angular/core';
 import { ProductModel } from '../../Models/Product.model';
 import { Router, RouterLink } from '@angular/router';
-import { CurrencyPipe, NgStyle, NgClass } from '@angular/common';
+import { CurrencyPipe, NgStyle } from '@angular/common';
 import { WishListService } from '../../Services/WishList.service';
 import { Button } from "../../directives/button";
 import { TitleSlicePipe } from '../../pipes/title-slice-pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-card',
-  imports: [NgStyle, CurrencyPipe, NgClass, Button, TitleSlicePipe, RouterLink],
+  imports: [NgStyle, CurrencyPipe, Button, TitleSlicePipe, RouterLink, TranslatePipe],
   templateUrl: './product-card.html',
   styleUrl: './product-card.css',
 })

@@ -2,12 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductModel } from '../../Models/Product.model';
 import { RouterLink } from "@angular/router";
 import { TranslatePipe } from '@ngx-translate/core';
-import { NgClass } from '@angular/common';
-import { HeroSkeleton } from '../../Shared/skeleton/hero-skeleton/hero-skeleton';
 
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, TranslatePipe, NgClass, HeroSkeleton],
+  imports: [RouterLink, TranslatePipe],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
 })

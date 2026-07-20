@@ -48,7 +48,7 @@
         <div class="flex gap-2 items-baseline">
           <p class="text-black-600 text-xs font-medium">
           <span class="text-black">
-            Available: 
+            {{'cards.Available' | translate}}: 
           </span> 
         </p> 
           <p [ngStyle]="{ 'color': product.stock > 0 ? 'green' : 'red' }">{{ product.stock }}</p>
@@ -65,7 +65,7 @@
             [disabled]="product.stock < 1"
             (click)="$event.stopPropagation(); onAddToCartClick()"
           >
-              Buy Now
+              {{'cards.Buy_Now' | translate}}
           </button>
       </div>
       </div>
