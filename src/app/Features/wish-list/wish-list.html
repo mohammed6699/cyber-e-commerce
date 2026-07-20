@@ -1,11 +1,11 @@
-<section class="container mx-auto px-4 py-8">
+<section class="container mx-auto px-4 py-11">
     <button class="fixed top-20 left-4 z-50 bg-white rounded-full p-2 shadow-md hover:bg-gray-100" (click)="navigateBack()">
         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
         </svg>
     </button>    
     <div class="grid grid-cols-4 gap-[16px]">
-        @for(item of filteredItems; track item.id) {
+        @for(item of filteredItems(); track item.id) {
             <app-product-card [product]="item"
             (addToCart)="addTocart($event)"
             ></app-product-card>

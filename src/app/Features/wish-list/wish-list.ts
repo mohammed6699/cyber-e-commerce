@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, computed } from '@angular/core';
 import { WishListService } from '../../Services/WishList.service';
 import { ProductCard } from '../../Shared/product-card/product-card';
 import { ProductModel } from '../../Models/Product.model';
@@ -16,7 +16,19 @@ import { Emptysection } from "../../directives/emptysection";
   styleUrl: './wish-list.css',
 })
 export class WishList implements OnInit, OnDestroy {
-  filteredItems: ProductModel[] = [];
+  searchQuery = signal<string>('');
+  
+  filteredItems = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    const items = this.wishlistSer.items();
+    if (!query) {
+      return items;
+    }
+    return items.filter(item => 
+      item.title.toLowerCase().includes(query)
+    );
+  });
+
   private searchSub!: Subscription;
   currentLang: any
   constructor (
@@ -28,24 +40,11 @@ export class WishList implements OnInit, OnDestroy {
   ){}
 
   ngOnInit() {
-    this.filteredItems = this.wishlistSer.items();
-    
     // Subscribe to the global search
     this.searchSub = this.productSer.search$.subscribe(query => {
-      this.filterItems(query);
+      this.searchQuery.set(query || '');
     });
     this.currentLang = localStorage.getItem('language')
-  }
-
-  filterItems(query: string) {
-    const allItems = this.wishlistSer.items();
-    if (!query) {
-      this.filteredItems = allItems;
-    } else {
-      this.filteredItems = allItems.filter(item => 
-        item.title.toLowerCase().includes(query.toLowerCase())
-      );
-    }
   }
 
   ngOnDestroy() {
@@ -56,8 +55,6 @@ export class WishList implements OnInit, OnDestroy {
 
   deleteItem(id: number){
     this.wishlistSer.deleteWishlistItem(id);
-    // getValue built in function for behaviour subject
-    this.filterItems(this.productSer['searchSubject'].getValue() || '');
     console.log(`item deleted`);
   }
   
