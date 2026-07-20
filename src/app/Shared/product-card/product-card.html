@@ -56,8 +56,8 @@
         <!-- Pricing -->
         <div class="flex items-end justify-between">
           <div class="flex flex-col md:flex-row items-baseline md:space-x-2 mt-2">
-            <span class="text-black font-thin line-through">{{product.price.toFixed(0)| currency: 'EGP'}}</span>
-            <span class="text-black-400 text-sm">{{ productOriginalrice(product.price, product.discountPercentage) | currency: 'EGP'}}</span>
+            <span class="text-black font-thin line-through">{{product.price | transferPipe | currency: 'EGP'}}</span>
+            <span class="text-black-400 text-sm">{{ productOriginalrice(product.price, product.discountPercentage) | transferPipe | currency: 'EGP'}}</span>
         </div>
       </div>
       <div class="flex gap-1 mt-2 justify-between">

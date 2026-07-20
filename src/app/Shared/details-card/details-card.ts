@@ -3,10 +3,11 @@ import { ProductModel } from '../../Models/Product.model';
 import { CurrencyPipe, PercentPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TransferPipePipe } from '../../pipes/transfer-pipe-pipe';
 
 @Component({
   selector: 'app-details-card',
-  imports: [CurrencyPipe, PercentPipe, FormsModule, TranslatePipe],
+  imports: [CurrencyPipe, PercentPipe, FormsModule, TranslatePipe, TransferPipePipe],
   templateUrl: './details-card.html',
   styleUrl: './details-card.css',
 })
@@ -19,9 +20,9 @@ export class DetailsCard {
   @Output() wishList = new EventEmitter<ProductModel>()
 
 
-  productOriginalPrice(price: number, discountPercentage: number){
+  productOriginalPrice(price: number, discountPercentage: number): number{
     const originalPrice = price - (price * (discountPercentage / 100));
-    return originalPrice.toFixed(2);
+    return Number(originalPrice.toFixed(2));
   }
   onAddToCartClick(): void{
     if(this.product.stock > 0){
