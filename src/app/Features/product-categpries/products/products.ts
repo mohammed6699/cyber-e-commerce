@@ -21,7 +21,8 @@ export class Products implements OnInit{
   selectedCategories: string[] = []
   filteredProductList: ProductModel[] = [];
   currentLang: any
-  isLoading: boolean = false;
+  isLoading: boolean = true;
+  searchText: string = ''
   constructor(
     private route: ActivatedRoute,
     private productSer : ProductService,
@@ -38,13 +39,18 @@ export class Products implements OnInit{
       if(catName){
         this.selectedCategories = [catName];
       }
-      this.productListMethod();
+      // this.productListMethod();
+      // handle search for the page
+      this.productSer.search$.subscribe(query => {
+        this.searchText = query;
+        this.productListMethod();
+      })
     })
     this.currentLang = localStorage.getItem('language')
   }
   productListMethod(){
     this.isLoading = true;
-    this.productSer.searchProductList('', 0, 0).subscribe({
+    this.productSer.searchProductList(this.searchText, 0, 0).subscribe({
       next: (res: SearchProducts) => {
         let filteredProducts = res.products;
 
@@ -74,5 +80,8 @@ export class Products implements OnInit{
     });
     this.wishlistSer.toogleWishList(product)
     
+  }
+  navigateBack(){
+    history.back()
   }
 }

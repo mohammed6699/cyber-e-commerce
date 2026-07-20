@@ -57,6 +57,10 @@ export class ProductPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const initialsearch = this.activatedRoute.snapshot.queryParams['q'];
+    if(initialsearch){
+      this.productSer.search = initialsearch;
+    }
     import('rxjs').then(({ combineLatest }) => {
       this.searchSub = combineLatest([
         this.activatedRoute.queryParams,

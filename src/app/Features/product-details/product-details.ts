@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductService } from '../../Services/Product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from '../../Models/Product.model';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { DetailsCard } from "../../Shared/details-card/details-card";
@@ -35,7 +35,8 @@ export class ProductDetails implements OnInit {
     private cartSer: CartService,
     private cdr: ChangeDetectorRef,
     private wishlistSer: WishListService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) { }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -101,5 +102,8 @@ export class ProductDetails implements OnInit {
         position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
     })
     this.wishlistSer.addToWishlist(product)
+  }
+  navigateBack(){
+    history.back()
   }
 }

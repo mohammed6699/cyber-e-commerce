@@ -39,6 +39,17 @@ export class Navbar implements OnInit{
 
   onSearch(q: string){
     this.productService.search = q;
+    // get current page url
+    let currentUrl = this.router.url;
+    if(!currentUrl.includes('products') && !currentUrl.includes('/wishlist')){
+      // if we are not in products page or wishlist page and I enter a search text navigate to products page and show the products
+      if(q.trim().length > 0){
+        this.router.navigate(['/products'], {
+          queryParams: {q},
+          queryParamsHandling: 'merge'
+        })
+      }
+    }
   }
   navigateToLogin(){
     this.router.navigate(['/login'])

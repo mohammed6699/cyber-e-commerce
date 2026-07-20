@@ -68,4 +68,7 @@ export class WishList implements OnInit, OnDestroy {
     });
     this.cartSer.addToCart(product);
   }
+  navigateBack(){
+    history.back()
+  }
 }

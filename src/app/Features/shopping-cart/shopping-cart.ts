@@ -117,4 +117,7 @@ export class ShoppingCart implements OnInit{
       this.router.navigate(['/checkout'])
     }
   }
+  navigateBack(){
+    history.back()
+  }
 }
