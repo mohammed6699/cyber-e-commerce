@@ -6,10 +6,11 @@ import { WishListService } from '../../Services/WishList.service';
 import { Button } from "../../directives/button";
 import { TitleSlicePipe } from '../../pipes/title-slice-pipe';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TransferPipePipe } from '../../pipes/transfer-pipe-pipe';
 
 @Component({
   selector: 'app-product-card',
-  imports: [NgStyle, CurrencyPipe, Button, TitleSlicePipe, RouterLink, TranslatePipe],
+  imports: [NgStyle, CurrencyPipe, Button, TitleSlicePipe, RouterLink, TranslatePipe, TransferPipePipe],
   templateUrl: './product-card.html',
   styleUrl: './product-card.css',
 })
@@ -39,8 +40,8 @@ export class ProductCard {
   navigateToProductDetails(): void{
     this.navigateToDetails.emit(this.product.id)
   }
-  productOriginalrice(price: number, discountPercentage: number){
+  productOriginalrice(price: number, discountPercentage: number): number{
     const originalPrice = price - (price * (discountPercentage / 100));
-    return originalPrice.toFixed(2);
+    return Number(originalPrice.toFixed(2));
   }
 }

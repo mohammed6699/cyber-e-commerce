@@ -35,11 +35,11 @@
           <div
             class="text-[#b3b3b3] text-lg md:text-xl font-normal line-through"
           >
-            {{product.price| currency: 'EGP' }}
+            {{product.price | transferPipe | currency: 'EGP'}}
           </div>
             <!-- ACTUAL PRICE           -->
           <div class="text-[#2c732f] text-xl md:text-2xl font-medium">
-              {{productOriginalPrice(product.price, product.discountPercentage) | currency: 'EGP' }}
+              {{productOriginalPrice(product.price, product.discountPercentage) | transferPipe | currency: 'EGP' }}
             </div>
             <!-- discount -->
             <div
