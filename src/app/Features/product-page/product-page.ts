@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../Services/Product.service';
 import { HotToastService } from '@ngxpert/hot-toast';
-import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { SearchProducts, ProductModel, ProductListModel } from '../../Models/Product.model';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SearchProducts, ProductModel } from '../../Models/Product.model';
 import { Subscription } from 'rxjs';
-import { CurrencyPipe, NgStyle } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { CategoriesModel } from '../../Models/Categories.model';
 import { ProductCard } from '../../Shared/product-card/product-card';
 import { CartService } from '../../Services/Cart.service';
@@ -14,7 +14,7 @@ import { ProductCardSkeleton } from '../../Shared/skeleton/product-card-skeleton
 
 @Component({
   selector: 'app-product-page',
-  imports: [CurrencyPipe, NgStyle, ProductCard, RouterLink, TranslatePipe, ProductCardSkeleton],
+  imports: [CurrencyPipe, ProductCard, TranslatePipe, ProductCardSkeleton],
   templateUrl: './product-page.html',
   styleUrl: './product-page.css',
 })

@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Emptysection } from "../../../directives/emptysection";
+import { Router } from '@angular/router';
+import { CartService } from '../../../Services/Cart.service';
 
 @Component({
   selector: 'app-payment-page',
@@ -36,7 +38,9 @@ export class PaymentPage implements OnInit{
   constructor(
     private fb: FormBuilder,
     private toast: HotToastService,
-    private translateSer: TranslateService
+    private translateSer: TranslateService,
+    private router: Router,
+    private cartService: CartService
   ){}
 
   ngOnInit(): void {
@@ -102,7 +106,9 @@ export class PaymentPage implements OnInit{
         duration: 1500,
         position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
     });
-    this.paymentForm.reset()
+    this.paymentForm.reset();
+    this.cartService.clearCart();
+    this.router.navigate(['/home']);
     console.log('Order saved:', finalOrder);
   }
   navigateBack(){

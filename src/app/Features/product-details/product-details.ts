@@ -6,7 +6,6 @@ import { HotToastService } from '@ngxpert/hot-toast';
 import { DetailsCard } from "../../Shared/details-card/details-card";
 import { CartService } from '../../Services/Cart.service';
 import { DetailsComponent } from "../../Shared/details-component/details-component";
-import { NgClass } from '@angular/common';
 import { ReviewsComponent } from "../../Shared/reviews-component/reviews-component";
 import { ProductCard } from '../../Shared/product-card/product-card';
 import { WishListService } from '../../Services/WishList.service';
@@ -18,7 +17,7 @@ import { ReviewSkeleton } from "../../Shared/skeleton/details-card/review-skelet
 
 @Component({
   selector: 'app-product-details',
-  imports: [DetailsCard, DetailsComponent, NgClass, ReviewsComponent, ProductCard, TranslatePipe, ProductCardSkeleton, DetailsCardSkeleton, DetailsSkeleton, ReviewSkeleton],
+  imports: [DetailsCard, DetailsComponent, ReviewsComponent, ProductCard, TranslatePipe, ProductCardSkeleton, DetailsCardSkeleton, DetailsSkeleton, ReviewSkeleton],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })

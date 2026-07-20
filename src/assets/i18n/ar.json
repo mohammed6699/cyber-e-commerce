@@ -168,7 +168,8 @@
     "Card_Holder_Name": "اسم حامل البطاقة",
     "Expire_Month": "الشهر (MM)",
     "Expire_Year": "السنة (YY)",
-    "CVV": "رمز الأمان (CVV)"
+    "CVV": "رمز الأمان (CVV)",
+    "Payment_processed_successfully_via": "تمت معالجة الدفعة بنجاح عبر"
 },
 
 "Shipment": {
@@ -200,6 +201,32 @@
         "Product_Details_loaded": "تم تحميل تفاصيل المنتج",
         "Error_loading_product_details": "حدث خطأ أثناء تحميل تفاصيل المنتج",
         "added_to_cart": "تمت الإضافة إلى سلة التسوق",
-        "added_to_your_wish_list": "تمت الإضافة إلى قائمة الأمنيات"
+        "added_to_your_wish_list": "تمت الإضافة إلى قائمة الأمنيات",
+        "added_to_wishList_succefully": "تمت الإضافة إلى قائمة الأمنيات بنجاح"
+    },
+    "cards": {
+        "Available": "متوفر",
+        "Buy_Now": "اشترِ الآن",
+        "Write_your_review_here": "اكتب مراجعتك هنا...",
+        "Leave_a_Review": "اترك مراجعة",
+        "Submit_Review": "إرسال المراجعة",
+        "Add_to_cart": "أضف إلى السلة",
+        "Credit_Card": "بطاقة ائتمانية",
+        "VISA": "فيزا",
+        "CARD_HOLDER": "حامل البطاقة",
+        "EXPIRES": "تاريخ الانتهاء",
+        "CVV": "رمز CVV",
+        "Details": "التفاصيل",
+        "Return_Policy": "سياسة الإرجاع",
+        "Product_Manfuacture_Data": "بيانات تصنيع المنتج",
+        "Man_Date": "تاريخ التصنيع",
+        "Barcode": "الباركود",
+        "QR_Code": "رمز QR",
+        "Product_Warranty_Information": "معلومات ضمان المنتج",
+        "Brand": "العلامة التجارية",
+        "Available_Stock": "المخزون المتوفر",
+        "Add_to_Wishlist": "أضف إلى المفضلة",
+        "Category": "الفئة",
+        "Tag": "الوسم"
     }
 }

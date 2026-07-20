@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ProductModel, SearchProducts } from '../../Models/Product.model';
-import { DatePipe, NgStyle } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ProductModel } from '../../Models/Product.model';
+import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProductCard } from "../product-card/product-card";
 import { CartService } from '../../Services/Cart.service';
 import { ProductService } from '../../Services/Product.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reviews-component',
-  imports: [DatePipe, NgStyle, FormsModule, ProductCard, TranslatePipe],
+  imports: [DatePipe, FormsModule, TranslatePipe],
   templateUrl: './reviews-component.html',
   styleUrl: './reviews-component.css',
 })
@@ -52,12 +51,5 @@ export class ReviewsComponent{
     if (this.product.reviews.length === 0) return 0;
     const count = this.product.reviews.filter((review) => review.rating === stars).length;
     return Math.round((count / this.product.reviews.length) * 100);
-  }
-  
-  AddToCart(){
-
-  }
-  AddToWishlist(){
-
   }
 }

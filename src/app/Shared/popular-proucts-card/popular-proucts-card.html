@@ -23,7 +23,7 @@
             [disabled]="product.stock < 1"
             (click)="$event.stopPropagation(); onAddToCartClick()"
           >
-              {{ isLast ? 'Buy Now' : 'Add to cart' }}
+              {{ isLast ? ('cards.Buy_Now' | translate) : ('cards.Add_to_cart' | translate) }}
           </button>
       </div>
       </div>

@@ -67,14 +67,14 @@ export class Products implements OnInit{
     })
   }
   onAddToCart(product: ProductModel){
-    this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_cart_suddefully')}`, {
+    this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_cart_succefully')}`, {
         duration: 1500,
         position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
     });
     this.cartSer.addToCart(product);
   }
   onWishListClick(product: ProductModel): void{
-    this.toast.success(`${product.title} added to wishList suddefully`, {
+    this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_wishList_succefully')}`, {
         duration: 1500,
         position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
     });

@@ -2,41 +2,41 @@
     <div class="bg-white w-full md:border md:border-gray-200 roundee-none md:rounded-[12px] p-6">
         <!-- details section -->
          <div>
-            <h1 class="text-xl font-semibold mb-4">Details</h1>
+            <h1 class="text-xl font-semibold mb-4">{{'cards.Details' | translate}}</h1>
             <p class="text-gray-700">{{product.description}}</p>
          </div>
          <div>
-            <h1 class="text-xl font-semibold mt-6">Return Policy</h1>
+            <h1 class="text-xl font-semibold mt-6">{{'cards.Return_Policy' | translate}}</h1>
             <p class="text-gray-700">{{product.returnPolicy}}</p>
          </div>
          <div>
-            <h1 class="text-xl font-semibold mt-6">Product Manfuacture Data</h1>
+            <h1 class="text-xl font-semibold mt-6">{{'cards.Product_Manfuacture_Data' | translate}}</h1>
             <div class="flex justify-between">
-                <p class="mt-2">Man. Date:</p>
+                <p class="mt-2">{{'cards.Man_Date' | translate}}:</p>
                 <p class="mt-2">{{product.meta.createdAt | date}}</p>
             </div>
               <hr class="mt-2 mb-2">
             <div class="flex justify-between">
-              <p>Barcode:</p>
+              <p>{{'cards.Barcode' | translate}}:</p>
               <p>{{product.meta.barcode}}</p>
             </div>
             <hr class="mt-2 mb-2">
             <div class="flex justify-between">
-              <p class="self-center">QR Code: </p>
+              <p class="self-center">{{'cards.QR_Code' | translate}}: </p>
               <img class="h-20" [src]="product.meta.qrCode" />
             </div>
             <hr class="mt-2 mb-2">
          </div>
          <div>
             <div class="flex justify-between">
-                <h1 class="text-xl font-semibold mt-6">Product Warranty Information</h1>
+                <h1 class="text-xl font-semibold mt-6">{{'cards.Product_Warranty_Information' | translate}}</h1>
                 <p class="mt-4">{{product.warrantyInformation}}</p>
             </div>
          </div>
          <hr class="mt-2 mb-2">
          <div>
             <div class="flex justify-between">
-                <h1 class="text-xl font-semibold mt-6">Return Policy</h1>
+                <h1 class="text-xl font-semibold mt-6">{{'cards.Return_Policy' | translate}}</h1>
                 <p>{{product.returnPolicy}}</p>
             </div>
          </div>
