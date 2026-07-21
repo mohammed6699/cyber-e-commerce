@@ -10,6 +10,7 @@ import { WishListService } from '../../../Services/WishList.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { ProductCardSkeleton } from '../../../Shared/skeleton/product-card-skeleton/product-card-skeleton';
+import { ProductsProxy } from './products.proxy';
 
 @Component({
   selector: 'app-products',
@@ -29,42 +30,37 @@ export class Products implements OnInit{
     private toast: HotToastService,
     private cartSer: CartService,
     private wishlistSer: WishListService,
-    private cdr: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public productsProxy: ProductsProxy,
+    private cdr: ChangeDetectorRef
   ){}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const catName = params['slug'];
+
+      // Reset state for new category
+      this.productsProxy.filteredProductList.set([]);
+      this.productsProxy.isLoading.set(true);
+
       if(catName){
         this.selectedCategories = [catName];
+        this.productsProxy.selectedCategories.set([catName]);
+      } else {
+        this.productsProxy.selectedCategories.set([]);
       }
-      // this.productListMethod();
-      // handle search for the page
+
       this.productSer.search$.subscribe(query => {
         this.searchText = query;
+        this.productsProxy.searchText = query
         this.productListMethod();
       })
     })
     this.currentLang = localStorage.getItem('language')
   }
   productListMethod(){
-    this.isLoading = true;
-    this.productSer.searchProductList(this.searchText, 0, 0).subscribe({
-      next: (res: SearchProducts) => {
-        let filteredProducts = res.products;
-
-        if(this.selectedCategories.length > 0){
-          filteredProducts = filteredProducts.filter((prd:any) => this.selectedCategories.includes(prd.category));
-        }
-        this.cdr.markForCheck()
-        this.filteredProductList = filteredProducts;
-        this.isLoading = false;
-      },
-      error: () => {
-        this.isLoading = false;
-      }
-    })
+      this.productsProxy.productListMethod();
+      this.cdr.detectChanges()
   }
   onAddToCart(product: ProductModel){
     this.toast.success(`${product.title} ${this.translate.instant('toasts.added_to_cart_succefully')}`, {
