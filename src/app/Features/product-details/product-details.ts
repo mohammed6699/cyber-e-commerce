@@ -14,6 +14,7 @@ import { ProductCardSkeleton } from '../../Shared/skeleton/product-card-skeleton
 import { DetailsCardSkeleton } from "../../Shared/skeleton/details-card/details-card-skeleton";
 import { DetailsSkeleton } from "../../Shared/skeleton/details-card/details.skeleton";
 import { ReviewSkeleton } from "../../Shared/skeleton/details-card/review-skeleton";
+import { ProductDetailsProxy } from './product-details.proxy';
 
 @Component({
   selector: 'app-product-details',
@@ -28,51 +29,27 @@ export class ProductDetails implements OnInit {
   relatedProducts: ProductModel[] = [];
   currentLang: any
   constructor(
-    private productSer: ProductService,
     private route: ActivatedRoute,
     private toast: HotToastService,
     private cartSer: CartService,
-    private cdr: ChangeDetectorRef,
     private wishlistSer: WishListService,
     private translate: TranslateService,
-    private router: Router
+    public detailsProxy: ProductDetailsProxy
   ) { }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.productId = Number(params.get('id')!);
+      this.detailsProxy.productId = this.productId;
       if (this.productId) {
         this.loadProductDetails()
       }
+      console.log(this.productId);
+      
     })
     this.currentLang = localStorage.getItem('language')
   }
   loadProductDetails() {
-    this.productSer.getProductDetails(this.productId).subscribe({
-      next: (res) => {
-        this.product = res;
-        this.loadRelatedProducts(res.category);
-        this.toast.success(`${this.translate.instant('toasts.Product_Details_loaded')}`, {
-            duration: 1500,
-            position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
-        });
-        this.cdr.detectChanges()
-      },
-      error: (err) => {
-        this.toast.error(`${this.translate.instant('toasts.Error_loading_product_details')}`, {
-            duration: 1500,
-            position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
-        });
-        console.log(err);
-      }
-    })
-  }
-  loadRelatedProducts(category: string) {
-    this.isRelatedLoading = true;
-    this.productSer.getProductList().subscribe(res => {
-      this.relatedProducts = res.products.filter(p => p.category === category && p.id !== this.productId);
-      this.isRelatedLoading = false;
-      this.cdr.detectChanges()
-    });
+    this.detailsProxy.loadProductDetails()
   }
   productOriginalPrice(price: number, discountPercentage: number) {
     const originalPrice = price - (price * (discountPercentage / 100));

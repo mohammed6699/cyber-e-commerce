@@ -6,17 +6,17 @@ import { environment } from "../../environments/environment.development";
 import { CategoriesModel } from "../Models/Categories.model";
 import { distinctUntilChanged } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { HttpService } from "./Httpservice.service";
 @Injectable({
     providedIn: 'root'
 })
 export class ProductService {
-    baseUrl = environment.baseUrl + 'products'
     // behaviour subject to maage dynamic search 
     private searchSubject = new BehaviorSubject<string>('');
     // as requested in the pdf to use distinctUntilChanged() operator to filter out the search 
     search$ = this.searchSubject.asObservable().pipe(distinctUntilChanged(), debounceTime(1000));
     constructor(
-        private http: HttpClient
+        private httpSer: HttpService
     ){}
     // set serch query
     set search(searchQuery: string){
@@ -28,18 +28,18 @@ export class ProductService {
         .set('q', q)
         .set('limit', limit)
         .set('skip', skip);
-        return this.http.get<SearchProducts>(`${this.baseUrl}/search`, {params});
+        return this.httpSer.get<SearchProducts>(`products/search`, params);
     }
     // products list
     getProductList(): Observable<ProductListModel>{
-        return this.http.get<ProductListModel>(`${this.baseUrl}`)
+        return this.httpSer.get<ProductListModel>('products');
     }
     // get product details
     getProductDetails(prdId: number): Observable<ProductModel>{
-        return this.http.get<ProductModel>(`${this.baseUrl}/${prdId}`)
+        return this.httpSer.get<ProductModel>(`products/${prdId}`)
     }
     // get categorieslist
     getCategoriesList(): Observable<CategoriesModel[]>{
-        return this.http.get<CategoriesModel[]>(`${this.baseUrl}/categories`)
+        return this.httpSer.get<CategoriesModel[]>(`products/categories`)
     }
 }
