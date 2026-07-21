@@ -113,12 +113,13 @@
             <div class="flex flex-col gap-[8px]">
                 <label class="text-[#7f7f7f] text-lg">{{'Cart.Your_bonus_card_number' | translate}}</label>
                 <div class="relative flex items-center">
-                    <app-form-input 
+                    <app-form-input
+                    class="w-full"
                       formControlName="bonusCard"
                       [InputplaceHolder]="'Cart.Enter_card_number' | translate"
-                      [inputClasses]="'absolute w-full h-[56px] bg-white text-gray-900 border-2 border-[#9F9F9F] rounded-[7px] p-[20px]'"
+                      [inputClasses]="'w-full h-[56px] bg-white text-gray-900 border-2 border-[#9F9F9F] rounded-[7px] p-[20px]'"
                     />
-                <button class="absolute right-2 top-3 rounded-md bg-white text-black border-2 border-black px-3 py-1 text-sm font-semibold hover:bg-black hover:text-white transition">apply</button>
+                <button class="absolute right-3 top-3 rounded-md bg-white text-black border-2 border-black px-3 py-1 text-sm font-semibold hover:bg-black hover:text-white transition">apply</button>
                 </div>
                 @if(orderForm.get('bonusCard')?.hasError('required') && orderForm.get('bonusCard')?.touched){
                         <span class="text-red-500 pt-0.5">{{'Cart.this_input' | translate}}</span>
