@@ -4,16 +4,14 @@ import { CartService } from '../../Services/Cart.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductModel } from '../../Models/Product.model';
 import { Router } from '@angular/router';
-import { share } from 'rxjs';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { FormInput } from "../../Shared/form-input/form-input";
-import { CustomInput } from '../../directives/custom-input';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, FormsModule, ReactiveFormsModule, TranslatePipe, FormInput, CustomInput],
+  imports: [CommonModule, CurrencyPipe, FormsModule, ReactiveFormsModule, TranslatePipe, FormInput],
   templateUrl: './shopping-cart.html',
   styleUrl: './shopping-cart.css',
 })
