@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { AddressModel } from '../../../Models/Address.model';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { FormInput } from "../../../Shared/form-input/form-input";
 
 @Component({
   selector: 'app-address-page',
-  imports: [ReactiveFormsModule, TranslatePipe],
+  imports: [ReactiveFormsModule, TranslatePipe, FormInput],
   templateUrl: './address-page.html',
   styleUrl: './address-page.css',
 })

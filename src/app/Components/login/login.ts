@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { FormInput } from "../../Shared/form-input/form-input";
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, TranslatePipe],
+  imports: [ReactiveFormsModule, TranslatePipe, FormInput],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
