@@ -97,14 +97,15 @@
     <!-- right: Order Summary -->
     <div class="md:col-span-1 md:h-[656px]">
       <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <form class="" [formGroup]="orderForm">
+          <form [formGroup]="orderForm">
             <h3 class="text-xl font-semibold mb-4">{{'Cart.Order_Summary' | translate}}</h3>
           <div class="flex flex-col pt-[40px] mb-[24px] gap-[8px]">
               <label class="text-[#7f7f7f] text-lg">{{'Cart.Discount_code' | translate}}</label>
-              <input 
-                type="text" 
-                formControlName="promoCode"
-                class="w-full h-[56px] bg-white text-gray-900 border-2 border border-[#9F9F9F] rounded-[7px] p-[20px]" placeholder="{{'Cart.Enter_promo_code' | translate}}"/>
+                <app-form-input 
+                  formControlName="promoCode"
+                  [InputplaceHolder]="'Cart.Enter_promo_code' | translate"
+                  [inputClasses]="'w-full h-[56px] bg-white text-gray-900 border-2 border-[#9F9F9F] rounded-[7px] p-[20px]'"
+                />
           </div>
           @if(orderForm.get('promoCode')?.hasError('required') && orderForm.get('promoCode')?.touched){
                         <span class="text-red-500 pt-0.5">{{'Cart.this_input_is_required' | translate}}</span>
@@ -112,12 +113,12 @@
             <div class="flex flex-col gap-[8px]">
                 <label class="text-[#7f7f7f] text-lg">{{'Cart.Your_bonus_card_number' | translate}}</label>
                 <div class="relative flex items-center">
-                  <input 
-                    type="text"
-                    maxlength="12"
-                    formControlName="bonusCard"
-                    class="w-full h-[56px] border border-[#9F9F9F] rounded-[7px] px-4 bg-white pr-20" placeholder="{{'Cart.Enter_card_number' | translate}}"/>
-                <button class="absolute right-2 rounded-md bg-white text-black border-2 border-black px-3 py-1 text-sm font-semibold hover:bg-black hover:text-white transition">apply</button>
+                    <app-form-input 
+                      formControlName="bonusCard"
+                      [InputplaceHolder]="'Cart.Enter_card_number' | translate"
+                      [inputClasses]="'absolute w-full h-[56px] bg-white text-gray-900 border-2 border-[#9F9F9F] rounded-[7px] p-[20px]'"
+                    />
+                <button class="absolute right-2 top-3 rounded-md bg-white text-black border-2 border-black px-3 py-1 text-sm font-semibold hover:bg-black hover:text-white transition">apply</button>
                 </div>
                 @if(orderForm.get('bonusCard')?.hasError('required') && orderForm.get('bonusCard')?.touched){
                         <span class="text-red-500 pt-0.5">{{'Cart.this_input' | translate}}</span>

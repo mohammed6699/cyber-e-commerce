@@ -1,0 +1,8 @@
+<input 
+      [ngClass]="inputClasses"
+      [type]="type" 
+      [placeholder]="InputplaceHolder | translate"
+      [value]="value"
+      (input)="onInputChange($event)"
+      (blur)="onTouch()"
+/>

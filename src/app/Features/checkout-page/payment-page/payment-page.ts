@@ -9,10 +9,11 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Emptysection } from "../../../directives/emptysection";
 import { Router } from '@angular/router';
 import { CartService } from '../../../Services/Cart.service';
+import { FormInput } from "../../../Shared/form-input/form-input";
 
 @Component({
   selector: 'app-payment-page',
-  imports: [CurrencyPipe, PaymentCard, ReactiveFormsModule, FormsModule, TranslatePipe, Emptysection],
+  imports: [CurrencyPipe, PaymentCard, ReactiveFormsModule, FormsModule, TranslatePipe, Emptysection, FormInput],
   templateUrl: './payment-page.html',
   styleUrl: './payment-page.css',
 })

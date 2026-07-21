@@ -7,11 +7,13 @@ import { Router } from '@angular/router';
 import { share } from 'rxjs';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { FormInput } from "../../Shared/form-input/form-input";
+import { CustomInput } from '../../directives/custom-input';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, FormsModule, ReactiveFormsModule, TranslatePipe],
+  imports: [CommonModule, CurrencyPipe, FormsModule, ReactiveFormsModule, TranslatePipe, FormInput, CustomInput],
   templateUrl: './shopping-cart.html',
   styleUrl: './shopping-cart.css',
 })

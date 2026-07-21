@@ -43,11 +43,10 @@
                         <label class="block text-gray-800 font-bold mb-2" for="userName">
                             {{'login.User_Name' | translate}}
                         </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                        id="userName" 
-                        formControlName="userName" 
-                        type="text" 
-                        placeholder="{{'login.please_enter_your_user_name' | translate}}"
+                        <app-form-input 
+                        [control]="loginForm.get('userName')!"
+                        type="text"
+                        InputplaceHolder="login.please_enter_your_user_name"
                         />
                         @if(loginForm.get('userName')?.touched && loginForm.get('userName')?.invalid){
                             <p class="text-red-500 text-xs mt-2">{{'login.please_enter_your_user_name' | translate}}</p>
@@ -59,11 +58,10 @@
                         <label class="block text-gray-800 font-bold mb-2" for="password">
                             {{'login.password' | translate}}
                         </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="password"
-                        formControlName="password"
-                        type="password" 
-                        placeholder="••••••••"
+                        <app-form-input 
+                        [control]="loginForm.get('password')"
+                        type="password"
+                        InputplaceHolder="••••••••"
                         />
                         @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid){
                             <span class="text-red-500 text-xs mt-2">{{'login.password_is_required' | translate}}</span>

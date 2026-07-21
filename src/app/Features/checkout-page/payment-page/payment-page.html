@@ -77,12 +77,14 @@
                 ></app-payment-card>
 
                 <form [formGroup]="paymentForm" class="flex flex-col gap-4 p-6 border rounded-lg">
-                    <input formControlName="cardNumber" placeholder="{{'payment.Card_Number' | translate}}" class="border p-3 rounded" maxlength="16" />
-                    <input formControlName="cardOwnerName" placeholder="{{'payment.Card_Holder_Name' | translate}}" class="border p-3 rounded" />
+                    <app-form-input 
+                        formControlName="cardNumber" 
+                        [InputplaceHolder]="'payment.Card_Number' | translate" maxlength="16" [inputClasses]="'w-full rounded-lg border border-[#9F9F9F] py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none'"/>
+                    <app-form-input formControlName="cardOwnerName" [InputplaceHolder]="'payment.Card_Holder_Name' | translate" [inputClasses]="'w-full rounded-lg border border-[#9F9F9F] py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none'" />
                     <div class="flex gap-4">
-                        <input formControlName="expireMonth" placeholder="MM" class="border p-3 rounded w-1/3" maxlength="2" />
-                        <input formControlName="expireYear" placeholder="YY" class="border p-3 rounded w-1/3" maxlength="2" />
-                        <input formControlName="cvv" placeholder="CVV" class="border p-3 rounded w-1/3" maxlength="3" (focus)="isFlipped = true" (blur)="isFlipped = false" />
+                        <app-form-input formControlName="expireMonth" [InputplaceHolder]="'MM'" maxlength="2" [inputClasses]="'w-full rounded-lg border border-[#9F9F9F] py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none'" />
+                        <app-form-input formControlName="expireYear" [InputplaceHolder]="'YY'" maxlength="2" [inputClasses]="'w-full rounded-lg border border-[#9F9F9F] py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none'" />
+                        <app-form-input [control]="paymentForm.get('cvv')" [InputplaceHolder]="'CVV'" maxlength="3" (focus)="isFlipped = true" (blur)="isFlipped = false" [inputClasses]="'w-full rounded-lg border border-[#9F9F9F] py-2 px-3 focus:border-black focus:ring-1 focus:ring-black outline-none'" />
                     </div>
                 </form>
             }
