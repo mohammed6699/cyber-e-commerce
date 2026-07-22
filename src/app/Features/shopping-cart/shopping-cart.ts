@@ -38,7 +38,7 @@ export class ShoppingCart implements OnInit{
     this.FinalTotalAmout = this.totalAmout;
     this.orderForm = this.fb.group({
       promoCode: ['', Validators.required],
-      bonusCard: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]]
+      bonusCard: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]]
     })
     this.orderForm.valueChanges.subscribe(() => {
       this.calculateTotalPrice(this.orderForm.value);
