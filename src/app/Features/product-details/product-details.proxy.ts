@@ -1,4 +1,4 @@
-import { Injectable, OnInit, signal } from "@angular/core";
+import { DestroyRef, Injectable, OnInit, signal } from "@angular/core";
 import { ProductModel } from "../../Models/Product.model";
 import { ProductService } from "../../Services/Product.service";
 import { ActivatedRoute } from "@angular/router";
@@ -7,6 +7,7 @@ import { CartService } from "../../Services/Cart.service";
 import { TranslateService } from "@ngx-translate/core";
 import { WishListService } from "../../Services/WishList.service";
 import { take } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Injectable({
     providedIn: 'root'
@@ -21,13 +22,14 @@ export class ProductDetailsProxy {
         private productSer: ProductService,
         private toast: HotToastService,
         private translate: TranslateService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private destroyRef: DestroyRef
     ){
         this.currentLang = localStorage.getItem('language')
     }
     loadProductDetails(){
         this.productSer.getProductDetails(this.productId).pipe(
-          take(1),
+          takeUntilDestroyed(this.destroyRef),
         ).subscribe({
       next: (res) => {
         this.product.set(res);
@@ -50,7 +52,7 @@ export class ProductDetailsProxy {
     loadRelatedProducts(category: string) {
     this.isRelatedLoading.set(true);
     this.productSer.getProductList().pipe(
-      take(1),
+      takeUntilDestroyed(this.destroyRef),
     ).subscribe(res => {
       this.relatedProducts.set(res.products.filter(p => p.category === category && p.id !== this.productId));
       this.isRelatedLoading.set(false);

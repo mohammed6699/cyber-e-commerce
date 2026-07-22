@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Injectable, signal, Signal } from "@angular/core";
+import { ChangeDetectorRef, DestroyRef, Injectable, signal, Signal } from "@angular/core";
 import { ProductService } from "../../Services/Product.service";
 import { ProductModel, SearchProducts } from "../../Models/Product.model";
 import { TranslateService } from "@ngx-translate/core";
@@ -6,6 +6,7 @@ import { HotToastService } from "@ngxpert/hot-toast";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CategoriesModel } from "../../Models/Categories.model";
 import { take } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Injectable({
     providedIn: 'root'
@@ -25,12 +26,14 @@ export class ProductProxyService {
     isLoading = signal<boolean>(true)
     currentLang: any;
     categories: CategoriesModel[] = []
+    // in case you have to use takeUntillDestroy() ypu have to inject DestroyRef in consttructor
     constructor(
         private productService: ProductService,
         private translate:TranslateService,
         private toast:HotToastService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private destroy: DestroyRef
     ){
         this.currentLang = localStorage.getItem('language')
     }
@@ -39,7 +42,7 @@ export class ProductProxyService {
       this.isLoading.set(true)
       // handle the memory leak alos for search
         this.productService.searchProductList(this.searchText, 0, 0).pipe(
-          take(1),
+          takeUntilDestroyed(this.destroy),
         ).subscribe({
             next: (res: SearchProducts) => {
                 let filteredProducts = res.products;
@@ -102,7 +105,7 @@ export class ProductProxyService {
     categoryList(){
     // handle memory leak using pipe and take
     this.productService.getCategoriesList().pipe(
-      take(1),
+      takeUntilDestroyed(this.destroy),
     ).subscribe({
       next: (res) => {
         this.categories = res
