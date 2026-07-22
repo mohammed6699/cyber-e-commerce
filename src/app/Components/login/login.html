@@ -44,12 +44,13 @@
                             {{'login.User_Name' | translate}}
                         </label>
                         <app-form-input 
-                        [control]="loginForm.get('userName')!"
+                        formControlName="userName"
                         type="text"
-                        InputplaceHolder="login.please_enter_your_user_name"
+                        [InputplaceHolder]="'login.please_enter_your_user_name'"
+                        [inputClasses]="'w-full h-[56px] bg-white text-gray-900 border-2 border-[#9F9F9F] rounded-[7px] p-[20px]'"
                         />
                         @if(loginForm.get('userName')?.touched && loginForm.get('userName')?.invalid){
-                            <p class="text-red-500 text-xs mt-2">{{'login.please_enter_your_user_name' | translate}}</p>
+                            <span class="text-red-500 text-xs mt-2">{{'login.please_enter_your_user_name' | translate}}</span>
                         }
                     </div>
 
@@ -59,9 +60,10 @@
                             {{'login.password' | translate}}
                         </label>
                         <app-form-input 
-                        [control]="loginForm.get('password')"
+                        formControlName="password"
                         type="password"
-                        InputplaceHolder="••••••••"
+                        [InputplaceHolder]="'••••••••'"
+                        [inputClasses]="'w-full h-[56px] bg-white text-gray-900 border-2 border-[#9F9F9F] rounded-[7px] p-[20px]'"
                         />
                         @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid){
                             <span class="text-red-500 text-xs mt-2">{{'login.password_is_required' | translate}}</span>
