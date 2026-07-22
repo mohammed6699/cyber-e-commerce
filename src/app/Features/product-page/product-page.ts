@@ -68,8 +68,10 @@ export class ProductPage implements OnInit, OnDestroy {
         this.productSer.search$
       ]).subscribe(([params, query]) => {
         this.pageNumber = params['page'] ? +params['page'] : 1;
+        const previousSearchText = this.searchText;
         this.searchText = query;
-        if (this.searchText !== query) {
+        this.productProxy.searchText = query;
+        if (previousSearchText !== query) {
           this.pageNumber = 1;
           this.pageSize = 12;
         }
