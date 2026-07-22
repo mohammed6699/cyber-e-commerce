@@ -6,6 +6,7 @@ import { HotToastService } from "@ngxpert/hot-toast";
 import { CartService } from "../../Services/Cart.service";
 import { TranslateService } from "@ngx-translate/core";
 import { WishListService } from "../../Services/WishList.service";
+import { take } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +26,9 @@ export class ProductDetailsProxy {
         this.currentLang = localStorage.getItem('language')
     }
     loadProductDetails(){
-        this.productSer.getProductDetails(this.productId).subscribe({
+        this.productSer.getProductDetails(this.productId).pipe(
+          take(1),
+        ).subscribe({
       next: (res) => {
         this.product.set(res);
         this.loadRelatedProducts(res.category);
@@ -46,7 +49,9 @@ export class ProductDetailsProxy {
     }
     loadRelatedProducts(category: string) {
     this.isRelatedLoading.set(true);
-    this.productSer.getProductList().subscribe(res => {
+    this.productSer.getProductList().pipe(
+      take(1),
+    ).subscribe(res => {
       this.relatedProducts.set(res.products.filter(p => p.category === category && p.id !== this.productId));
       this.isRelatedLoading.set(false);
     });

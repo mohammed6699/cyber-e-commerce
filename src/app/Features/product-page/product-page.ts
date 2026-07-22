@@ -101,7 +101,7 @@ export class ProductPage implements OnInit, OnDestroy {
   }
   // gategory list
   loadGategoryList() {
-    this.productProxy.categoryList()
+   this.productProxy.categoryList();
   }
   onCategoryChange(category: string, event: Event): void {
     this.productProxy.changeCategory(category, event)
