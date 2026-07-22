@@ -60,7 +60,7 @@
         "Brand": "Brand",
         "Category": "Category",
         "Price": "Price",
-        "Range_Slider": "Range Slider",
+        "Range_Slider":"Range Slider",
         "Price_Range_(Up to)": "Price Range (Up to)",
         "Rate": "Rate",
         "Rate_Slider": "Rate Slider",

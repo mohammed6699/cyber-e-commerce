@@ -18,14 +18,14 @@ export class ProductProxyService {
     maxPrice: number = 3000;
     avgRate: number = 0;
     currentSort: string = 'Sort: Featured';
-    total: number = 0;
+    total = signal<number>(0);
     skip: number = 0;
     pageNumber: number = 1;
     productList = signal<ProductModel[]>([])
     pageSize: number = 12;
     isLoading = signal<boolean>(true)
     currentLang: any;
-    categories: CategoriesModel[] = []
+    categories = signal<CategoriesModel[]>([])
     // in case you have to use takeUntillDestroy() ypu have to inject DestroyRef in consttructor
     constructor(
         private productService: ProductService,
@@ -72,7 +72,7 @@ export class ProductProxyService {
             filteredProducts.sort((a, b) => b.title.localeCompare(a.title));
             break;
             }
-            this.total = filteredProducts.length;
+            this.total.set(filteredProducts.length);
             const start = (this.pageNumber - 1) * this.pageSize;
             const end = start + this.pageSize;
             this.productList.set(filteredProducts.slice(start, end));
@@ -107,8 +107,8 @@ export class ProductProxyService {
     this.productService.getCategoriesList().pipe(
       takeUntilDestroyed(this.destroy),
     ).subscribe({
-      next: (res) => {
-        this.categories = res
+      next: (res: any) => {
+        this.categories.set(res)
       },
       error: (err) => {
       this.toast.error(this.translate.instant("products.Error_Loading_categories"), {
