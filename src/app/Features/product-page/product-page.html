@@ -52,7 +52,7 @@
             <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
               <h2 class="text-2xl font-bold mb-4">{{'products.Range_Slider' | translate}}</h2>
               <div class="mb-4">
-                <label for="price-range" class="block text-gray-700 font-bold mb-2">{{'products.Price_Range_(Up to)'}} {{ maxPrice | currency: 'EGP' }}</label>
+                <label for="price-range" class="block text-gray-700 font-bold mb-2">{{'products.Price_Range_(Up to)' | translate}} {{ maxPrice | currency: 'EGP' }}</label>
                 <input type="range" id="price-range" class="w-full accent-indigo-600" min="0" max="3000" [value]="minPrice" (input)="updatePrice($event)">
               </div>
               <div class="flex justify-between text-gray-500">
@@ -72,7 +72,7 @@
           <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
               <h2 class="text-2xl font-bold mb-4">{{'products.Rate_Slider' | translate}}</h2>
               <div class="mb-4">
-                <label for="rate-range" class="block text-gray-700 font-bold mb-2">{{'products.Rate_Range_(Up_to_5)' | translate}}</label>
+                <label for="rate-range" class="block text-gray-700 font-bold mb-2">{{'products.Rate_Range_(Up to 5)' | translate}}</label>
                 <input type="range" id="rate-range" class="w-full accent-indigo-600" min="0" max="5" [value]="avgRate" (input)="updateRate($event)">
               </div>
               <div class="flex justify-between text-gray-500">

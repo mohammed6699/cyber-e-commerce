@@ -20,6 +20,9 @@ export class CartService{
             }
             return [...items, {...product, quantity: 1}];
         });
+        if (product.stock > 0) {
+            product.stock--;
+        }
         localStorage.setItem('cart', JSON.stringify(this.cartItems()));
     }
     // delete product from cart

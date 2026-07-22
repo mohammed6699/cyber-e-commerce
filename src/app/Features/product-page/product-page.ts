@@ -22,12 +22,12 @@ import { ProductProxyService } from './Product.proxy';
 export class ProductPage implements OnInit, OnDestroy {
   searchText: string = '';
   pageSize: number = 12;
-  total: number = 0;
+  get total(): number { return this.productProxy.total(); }
   skip: number = 0;
   pageNumber: number = 1;
   productList: ProductModel[] = [];
   productPrice!: number[]
-  categories: CategoriesModel[] = []
+  get categories() { return this.productProxy.categories(); }
   private searchSub!: Subscription;
   selectedCategories: string[] = []
   minPrice: number = 0;
