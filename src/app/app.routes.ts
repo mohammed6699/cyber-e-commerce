@@ -45,6 +45,7 @@ export const routes: Routes = [
             },
             {
                 path: 'cart',
+                canActivate:[authGuard],
                 loadComponent: () => import('./Features/shopping-cart/shopping-cart').then(x => x.ShoppingCart)
             },
             {

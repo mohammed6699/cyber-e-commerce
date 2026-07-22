@@ -6,12 +6,11 @@ import { ProductService } from '../../Services/Product.service';
 import { CartService } from '../../Services/Cart.service';
 import { WishListService } from '../../Services/WishList.service';
 import { LanguageService } from '../../Services/Language.service';
-import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Button } from "../../directives/button";
-import { FormInput } from "../../Shared/form-input/form-input";
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, NgClass, CommonModule, FormsModule, TranslatePipe, Button, FormInput],
+  imports: [RouterLink, NgClass, CommonModule, FormsModule, TranslatePipe, Button],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
