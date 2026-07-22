@@ -64,7 +64,6 @@ export class PaymentPage implements OnInit{
     if(cardDetails){
       this.cardDetails = JSON.parse(cardDetails)
     }
-    console.log(this.cardDetails);
   }
 
   getCartItemsFromLocalStorage(){
@@ -75,7 +74,6 @@ export class PaymentPage implements OnInit{
     if(shipment){
       this.shipmentItems = JSON.parse(shipment)
     }
-    console.log(shipment);
   }
   
   getAddressItemsFromLocalStorage(){
@@ -89,7 +87,6 @@ export class PaymentPage implements OnInit{
     if(cartDetails){
       this.cartDetails = JSON.parse(cartDetails)
     }
-    console.log(this.cartDetails);
   }
 
   handlePayment(){
@@ -111,7 +108,6 @@ export class PaymentPage implements OnInit{
     this.paymentForm.reset();
     this.cartService.clearCart();
     this.router.navigate(['/home']);
-    console.log('Order saved:', finalOrder);
   }
   navigateBack(){
     history.back()
