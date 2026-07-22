@@ -5,6 +5,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { HotToastService } from "@ngxpert/hot-toast";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CategoriesModel } from "../../Models/Categories.model";
+import { take } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -36,7 +37,10 @@ export class ProductProxyService {
     // handle filter and sort
     searchProductMethod(){
       this.isLoading.set(true)
-        this.productService.searchProductList(this.searchText, 0, 0).subscribe({
+      // handle the memory leak alos for search
+        this.productService.searchProductList(this.searchText, 0, 0).pipe(
+          take(1),
+        ).subscribe({
             next: (res: SearchProducts) => {
                 let filteredProducts = res.products;
                 //Category Filter
@@ -96,17 +100,20 @@ export class ProductProxyService {
       this.searchProductMethod()
     };
     categoryList(){
-      this.productService.getCategoriesList().subscribe({
-        next: (res) => {
-          this.categories = res
-        },
-        error: (err) => {
-        this.toast.error(this.translate.instant("products.Error_Loading_categories"), {
-        duration: 1500,
-        position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
+    // handle memory leak using pipe and take
+    this.productService.getCategoriesList().pipe(
+      take(1),
+    ).subscribe({
+      next: (res) => {
+        this.categories = res
+      },
+      error: (err) => {
+      this.toast.error(this.translate.instant("products.Error_Loading_categories"), {
+      duration: 1500,
+      position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
     })
-        }
-      })
+    }
+    })
     }
     // change category
     changeCategory(category: string, event: Event){
