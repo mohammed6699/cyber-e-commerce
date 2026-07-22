@@ -83,6 +83,7 @@
     "profile": {
         "Welcome_back": "Welcome back",
         "Your_Last_Order": "Your Last Order",
+        "Order": "Order",
         "Shipping_Information": "Shipping Information",
         "Address": "Address",
         "Postcode": "Postcode",

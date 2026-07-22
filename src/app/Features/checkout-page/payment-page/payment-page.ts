@@ -101,8 +101,9 @@ export class PaymentPage implements OnInit{
       paymentMethod: this.paymentType,
       cardDetails: this.paymentType === 'card' ? this.paymentForm.value : null
     };
-
-    localStorage.setItem('finalOrder', JSON.stringify(finalOrder));
+    let existingOrders = JSON.parse(localStorage.getItem('finalOrder') || '[]');
+    existingOrders.push(finalOrder);
+    localStorage.setItem('finalOrder', JSON.stringify(existingOrders));
     this.toast.success(`${this.translateSer.instant('payment.Payment_processed_successfully_via')} ${this.paymentType}!`, {
         duration: 1500,
         position: this.currentLang === 'ar' ? 'top-right' : 'top-left'

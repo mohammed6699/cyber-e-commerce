@@ -83,6 +83,7 @@
     "profile": {
         "Welcome_back": "مرحبًا بعودتك،",
         "Your_Last_Order": "آخر طلب لك",
+        "Order": "الطلب",
         "Shipping_Information": "معلومات الشحن",
         "Address": "العنوان",
         "Postcode": "الرمز البريدي",

@@ -12,7 +12,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 })
 export class ProfilePage implements OnInit{
   userData!: UserModel;
-  orderData!: FinalOrderModel;
+  ordersList: FinalOrderModel[] = [];
   currentLang: any
   constructor(
     private toast: HotToastService,
@@ -38,8 +38,20 @@ export class ProfilePage implements OnInit{
   getOrderData(){
     const orderString = localStorage.getItem("finalOrder");
     if (orderString) {
-      this.orderData = JSON.parse(orderString);
+      try {
+        const orders = JSON.parse(orderString);
+        // Assuming the structure is an array of orders
+        if (Array.isArray(orders)) {
+          this.ordersList = [...orders].reverse();
+        } 
+        // Fallback: If it was stored as a single object previously
+        else if (orders && typeof orders === 'object') {
+          this.ordersList = [orders];
+        }
+      } catch (e) {
+        console.error("Error parsing orders:", e);
+      }
     }
-    console.log(this.orderData);
+    console.log("Final ordersList:", this.ordersList);
   }
 }
