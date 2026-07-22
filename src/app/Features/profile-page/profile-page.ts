@@ -32,7 +32,6 @@ export class ProfilePage implements OnInit{
         position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
     });
     }
-    console.log(this.userData);
     
   }
   getOrderData(){
@@ -52,6 +51,5 @@ export class ProfilePage implements OnInit{
         console.error("Error parsing orders:", e);
       }
     }
-    console.log("Final ordersList:", this.ordersList);
   }
 }

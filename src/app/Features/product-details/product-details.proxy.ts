@@ -44,7 +44,6 @@ export class ProductDetailsProxy {
             duration: 1500,
             position: this.currentLang === 'ar' ? 'top-right' : 'top-left'
         });
-        console.log(err);
       }
     })
     

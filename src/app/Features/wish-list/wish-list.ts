@@ -55,7 +55,6 @@ export class WishList implements OnInit, OnDestroy {
 
   deleteItem(id: number){
     this.wishlistSer.deleteWishlistItem(id);
-    console.log(`item deleted`);
   }
   
   addTocart(product: ProductModel){

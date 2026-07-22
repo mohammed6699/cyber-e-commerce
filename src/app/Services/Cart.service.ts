@@ -12,7 +12,6 @@ export class CartService{
     readonly cartTotalAmount = computed(() => this.items().reduce((total, item) => total + (item.price * (item.quantity || 1)), 0));
     // add to cart
     addToCart(product: ProductModel): void {
-        console.log('product added to cart');
         // solve the qty bug
         this.cartItems.update((items) => {
             const existingItem = items.find(i => i.id === product.id);

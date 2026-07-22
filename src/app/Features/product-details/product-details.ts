@@ -43,7 +43,6 @@ export class ProductDetails implements OnInit {
       if (this.productId) {
         this.loadProductDetails()
       }
-      console.log(this.productId);
       
     })
     this.currentLang = localStorage.getItem('language')
